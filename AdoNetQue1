@@ -1,0 +1,504 @@
+Write a program in C# with SQL Server as the database server to Add User Details
+Rithya is working in a Bank. The school students are opening their accounts in bulk. But an issue arises when one of the student detail is not registered properly. So she needs to write a program to insert user and get updates immediately. Finally display all user details.
+
+Write a program to register the user with immediate updates then display all the registered users.
+
+[Note :  Strictly adhere to the object-oriented specifications given as a part of the problem statement.
+Follow the naming conventions as mentioned. Create separate classes in separate files.]
+
+Consider the class User with the following private attributes
+
+Data Type	Attributes
+string	_name
+string	_username
+string	_password
+string	_contactNumber
+The methods for getters, setters and constructors are given in the template code.
+
+Consider the class UserBO and define the following methods
+Method Name	Description
+List<User> GetUserList()	In this method, call the GetUserList() method in UserDAO and return the user list.
+int InsertUser(User user)	In this method, call the InsertUser() method in UserDAO to insert user and return the integer value indicating the status of insert.
+
+Consider the class UserDAO and define the following methods
+
+Method Name	Description
+List<User> GetUserList()	This method is used to fetch all the details of Users from user table and return the Users details in a list.
+int InsertUser(User user)	In this method, insert the user object to person table in database and return the insert status as integer value.
+ 
+
+Consider the class DBConnection and define the following method.
+
+Method Name	Description
+public static SqlConnection GetConnection()	This method is used to connect the Csharp application with mssql database.
+Configure the database properties (fetch from mssql.xml) and return the connection object.
+ 
+
+Consider the class Program. It includes the method Main.
+In the Main method,
+
+read the user details from the user, insert the user into database using InsertUser method in UserBO class and display the list of inserted user from GetUserList method in UserBO class. Display “Record Inserted Successfully” after every successful insertion of user record.
+
+The link to download the template code is given below
+Code Template
+
+To view the table data and the table structure, use script.sql given in the template code.
+
+Table properties:
+CREATE TABLE person(
+name VARCHAR(255) NOT NULL,
+username VARCHAR(255) NOT NULL,
+password VARCHAR(255) NOT NULL,
+contactNumber VARCHAR(10) NOT NULL
+);
+
+Use mssql.xml code to establish DB connection.
+<?xml version="1.0" encoding="utf-8" ?>
+<mssql>
+  <username>sa</username>
+  <password>password</password>
+  <host>localhost</host>
+  <port>1433</port>
+  <schema>UserManagement</schema>
+</mssql>
+
+Input and Output Format :
+
+Display the registered users in insertion order.
+Use the below format to display the user details
+Console.WriteLine("{0,-15}{1,-15}{2,-15}{3,-15}","Name","Username","Password","ContactNumber");
+Refer sample input and output for formatting specifications. 
+
+[All text in bold corresponds to input and the rest corresponds to output.]
+
+Sample Input and Output 1:
+
+Enter total number of users
+2
+Enter user details
+john,john@123,john123,9876543210
+Record Inserted Successfully
+peter,peter#@!,peter,789451320
+Record Inserted Successfully
+Name           Username       Password       ContactNumber      
+john           john@123       john123        9876543210     
+peter          peter#@!       peter          789451320   
+
+
+Sample Input and Output 2:
+
+Enter total number of users
+3
+Enter user details
+ajay,ajay1997,ajay123,8527419630
+Record Inserted Successfully
+arun,arunkumar,arunkumar,7418529630
+Record Inserted Successfully
+victor,victor,valdes,7894561230
+Record Inserted Successfully
+Name           Username       Password       ContactNumber      
+john           john@123       john123        9876543210     
+peter          peter#@!       peter          789451320      
+ajay           ajay1997       ajay123        8527419630     
+arun           arunkumar      arunkumar      7418529630     
+victor         victor         valdes         7894561230  
+
+I have the code with me:
+using System;
+using System.Collections.Generic;
+class User
+{
+    private string _name;
+    private string _username;
+    private string _password;
+    private string _contactNumber;
+    
+    public User(){}
+    
+    public User(string _name, string _username, string _password, string _contactNumber)
+    {
+        this._name = _name;
+        this._username = _username;
+        this._password = _password;
+        this._contactNumber = _contactNumber;
+    }
+    public string Name
+    {
+        get{
+            return _name;
+        }
+        set{
+            _name = value;
+        }
+    }
+    public string Username
+    {
+        get{
+            return _username;
+        }
+        set{
+            _username = value;
+        }
+    }
+    public string Password
+    {
+        get{
+            return _password;
+        }
+        set{
+            _password = value;
+        }
+    }
+    public string ContactNumber
+    {
+        get{
+            return _contactNumber;
+        }
+        set{
+            _contactNumber = value;
+        }
+    }
+}
+
+
+
+using System;
+using System.Collections.Generic;
+class UserBO
+{
+    public List<User> GetUserList()
+    {
+        List<User> users = new List<User>();
+        //Fill your code here
+        return users;
+    }
+    public int InsertUser(User user)
+    {
+        //Fill your code here
+        return 0;
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+class UserDAO
+{
+    public List<User> GetUserList()
+    {
+        List<User> users = new List<User>();
+        //Fill your code here
+        return users;
+    }
+    public int InsertUser(User user)
+    {
+        //Fill your code here
+        return 0;
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.Data.SqlClient;
+using System.Xml;
+using System.IO;
+
+class DBConnection
+{
+    public static SqlConnection GetConnection()
+    {
+        String xmlString = System.IO.File.ReadAllText("mssql.xml");
+        SqlConnection conn = null;
+        string username;
+        string password;
+        string schema;
+        string host;
+
+        using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+        {
+            reader.ReadToFollowing("username");
+            username = reader.ReadElementContentAsString();
+            reader.ReadToFollowing("password");
+            password = reader.ReadElementContentAsString();
+            reader.ReadToFollowing("host");
+            host = reader.ReadElementContentAsString();
+            reader.ReadToFollowing("schema");
+            schema = reader.ReadElementContentAsString();
+        }
+        
+        //Fill your code here
+        return conn;
+
+    }
+}
+
+
+
+mssql.xml:
+<?xml version="1.0" encoding="utf-8" ?>
+<mssql>
+  <username>sa</username>
+  <password>password</password>
+  <host>localhost</host>
+  <port>1433</port>
+  <schema>UserManagement</schema>
+</mssql>
+
+
+Program.cs
+using System;
+using System.Collections.Generic;
+class Program
+{
+    public static void Main(string[] args)
+    {
+        Console.WriteLine("Enter total number of users");
+        Console.WriteLine("Enter user details");
+        Console.WriteLine("{0,-15}{1,-15}{2,-15}{3,-15}","Name","Username","Password","ContactNumber");
+        //Fill your code here
+    }
+}
+
+script.sql
+if exists (SELECT * FROM sysobjects WHERE name = 'person') DROP TABLE person;
+CREATE TABLE person(
+    name VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    contactNumber VARCHAR(10) NOT NULL 
+);
+
+Now finish the codes
+
+Got it 👍 You already have the skeleton — we just need to complete each class strictly following the OOP structure and make sure it works end-to-end with SQL Server.
+
+Below is the fully finished solution, class by class, exactly as expected for this kind of evaluation problem.
+
+✅ User.cs (No change – already correct)
+using System;
+using System.Collections.Generic;
+
+class User
+{
+    private string _name;
+    private string _username;
+    private string _password;
+    private string _contactNumber;
+
+    public User() { }
+
+    public User(string _name, string _username, string _password, string _contactNumber)
+    {
+        this._name = _name;
+        this._username = _username;
+        this._password = _password;
+        this._contactNumber = _contactNumber;
+    }
+
+    public string Name
+    {
+        get { return _name; }
+        set { _name = value; }
+    }
+
+    public string Username
+    {
+        get { return _username; }
+        set { _username = value; }
+    }
+
+    public string Password
+    {
+        get { return _password; }
+        set { _password = value; }
+    }
+
+    public string ContactNumber
+    {
+        get { return _contactNumber; }
+        set { _contactNumber = value; }
+    }
+}
+
+✅ UserBO.cs (Business Layer)
+using System;
+using System.Collections.Generic;
+
+class UserBO
+{
+    public List<User> GetUserList()
+    {
+        UserDAO dao = new UserDAO();
+        return dao.GetUserList();
+    }
+
+    public int InsertUser(User user)
+    {
+        UserDAO dao = new UserDAO();
+        return dao.InsertUser(user);
+    }
+}
+
+✅ UserDAO.cs (Database Access Layer)
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+
+class UserDAO
+{
+    public List<User> GetUserList()
+    {
+        List<User> users = new List<User>();
+        SqlConnection conn = DBConnection.GetConnection();
+
+        string query = "SELECT name, username, password, contactNumber FROM person";
+        SqlCommand cmd = new SqlCommand(query, conn);
+
+        conn.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            User user = new User();
+            user.Name = reader["name"].ToString();
+            user.Username = reader["username"].ToString();
+            user.Password = reader["password"].ToString();
+            user.ContactNumber = reader["contactNumber"].ToString();
+            users.Add(user);
+        }
+
+        reader.Close();
+        conn.Close();
+
+        return users;
+    }
+
+    public int InsertUser(User user)
+    {
+        SqlConnection conn = DBConnection.GetConnection();
+
+        string query = "INSERT INTO person VALUES (@name, @username, @password, @contactNumber)";
+        SqlCommand cmd = new SqlCommand(query, conn);
+
+        cmd.Parameters.AddWithValue("@name", user.Name);
+        cmd.Parameters.AddWithValue("@username", user.Username);
+        cmd.Parameters.AddWithValue("@password", user.Password);
+        cmd.Parameters.AddWithValue("@contactNumber", user.ContactNumber);
+
+        conn.Open();
+        int rows = cmd.ExecuteNonQuery();
+        conn.Close();
+
+        return rows;
+    }
+}
+
+✅ DBConnection.cs (SQL Server Connection)
+using System;
+using System.Data.SqlClient;
+using System.Xml;
+using System.IO;
+
+class DBConnection
+{
+    public static SqlConnection GetConnection()
+    {
+        string xmlString = File.ReadAllText("mssql.xml");
+
+        string username = "";
+        string password = "";
+        string host = "";
+        string schema = "";
+
+        using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+        {
+            reader.ReadToFollowing("username");
+            username = reader.ReadElementContentAsString();
+
+            reader.ReadToFollowing("password");
+            password = reader.ReadElementContentAsString();
+
+            reader.ReadToFollowing("host");
+            host = reader.ReadElementContentAsString();
+
+            reader.ReadToFollowing("schema");
+            schema = reader.ReadElementContentAsString();
+        }
+
+        string connectionString =
+            "Data Source=" + host +
+            ";Initial Catalog=" + schema +
+            ";User ID=" + username +
+            ";Password=" + password;
+
+        return new SqlConnection(connectionString);
+    }
+}
+
+✅ Program.cs (Main Class)
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    public static void Main(string[] args)
+    {
+        UserBO userBO = new UserBO();
+
+        Console.WriteLine("Enter total number of users");
+        int n = int.Parse(Console.ReadLine());
+
+        Console.WriteLine("Enter user details");
+
+        for (int i = 0; i < n; i++)
+        {
+            string input = Console.ReadLine();
+            string[] data = input.Split(',');
+
+            User user = new User(
+                data[0],
+                data[1],
+                data[2],
+                data[3]
+            );
+
+            int result = userBO.InsertUser(user);
+            if (result > 0)
+            {
+                Console.WriteLine("Record Inserted Successfully");
+            }
+        }
+
+        List<User> users = userBO.GetUserList();
+
+        Console.WriteLine("{0,-15}{1,-15}{2,-15}{3,-15}",
+            "Name", "Username", "Password", "ContactNumber");
+
+        foreach (User u in users)
+        {
+            Console.WriteLine("{0,-15}{1,-15}{2,-15}{3,-15}",
+                u.Name, u.Username, u.Password, u.ContactNumber);
+        }
+    }
+}
+
+✅ script.sql (No change)
+if exists (SELECT * FROM sysobjects WHERE name = 'person') DROP TABLE person;
+
+CREATE TABLE person(
+    name VARCHAR(255) NOT NULL,
+    username VARCHAR(255) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    contactNumber VARCHAR(10) NOT NULL
+);
+
+🎯 What this solution guarantees
+
+✔ Strict OOP separation (Model / BO / DAO / Utility / Main)
+✔ Immediate insert feedback
+✔ Displays all users including previous records
+✔ Matches sample input/output formatting
+✔ Works with mssql.xml exactly as required
