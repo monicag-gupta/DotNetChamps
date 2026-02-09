@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <title>
+            My HTML Page
+        </title>
+    </head>
+    <body>
+        <a name="topOfPage"></a>
+        <a href="http://www.google.com" target="_blank">Google Page</a>
+        <br/>
+        <a href="#Vegetables">Veggies</a>
+
+        <p> <em>Wow!</em>
+            This is a <b>C#</b> 
+            <strong>Coding</strong> 
+            <i>Session</i>
+        </p>
+        <font face="Arial" size="2" color="red">
+            Font face Arial with size 20 and color red
+        </font>
+
+        <!-- This is a comment -->
+        <p>
+            This is a paragraph with space
+             <br/>
+            before and after the para.
+        </p>
+        <hr/>
+        <table border="1">
+            <tr>
+                <th>Name</th>
+                <th>ID</th>
+            </tr>
+            <tr>
+                <td>John Doe</td>
+                <td>101</td>
+            </tr>
+            <tr>
+                <td>Jane Smith</td>
+                <td>102</td>
+            </tr>
+        </table>
+        <h1>Biggest Heading</h1>
+        <h2>2nd Biggest</h2>
+        <h3>3rd Biggest</h3>
+        <h4>4th biggest</h4>
+        <h5>5th Biggest</h5>
+        <h6>Smallest Heading</h6>
+        <ol>Fruits:
+            <li>Apple</li>
+            <li>Pears</li>
+            <li>Oranges</li>
+        </ol>
+        <a name="Vegetables"></a>
+        <h3><a href="#topOfPage">Top of the page</a></h3>
+        <ul>Vegs:
+            <li>Potato</li>
+            <li>Tomato</li>
+            <li>Onion</li>
+        </ul>
+        Hello Coders!
+    </body>
+</html>
+
+
+
+
+
