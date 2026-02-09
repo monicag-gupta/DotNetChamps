@@ -1,3 +1,5 @@
+Ques 1:
+
 Write a program in C# with SQL Server as the database server to Add User Details
 Rithya is working in a Bank. The school students are opening their accounts in bulk. But an issue arises when one of the student detail is not registered properly. So she needs to write a program to insert user and get updates immediately. Finally display all user details.
 
@@ -502,3 +504,366 @@ CREATE TABLE person(
 ✔ Displays all users including previous records
 ✔ Matches sample input/output formatting
 ✔ Works with mssql.xml exactly as required
+
+
+
+
+
+
+Ques 2:
+
+Write a program in C# with SQL Server as the database server to Update Person
+The ABC company employees mostly change their mobile numbers. So the company need application to update the mobile numbers of person. Write an application to update the mobile number if person exist in company.
+
+ 
+
+[Note :Strictly adhere to the object oriented specifications given as a part of the problem statement. Follow the naming conventions as mentioned. Create separate classes in separate files.]
+
+Create class Person with the following private variables/attributes.
+
+Data Type	Variable
+string	_name
+string	_mobileNumber
+string	_username
+string	_password
+
+Include appropriate properties.
+Include a default constructor and a four argument constructor with parameters in the following order
+        _name, _mobileNumber, _username, _password.
+
+Create class PersonBO with the following method
+Method	Description
+bool UpdatePerson(string _name, string _mobileNumber)	This method is used to invoke the method UpdatePerson() in the PersonDAO class.
+
+Create class PersonDAO with the following
+Method	Description
+bool UpdatePerson(string _name, string _mobileNumber)	In this method, if the given person's name exits, the mobile number of the paticular person will be updated and return true on successful updation, else return false.
+
+
+Create Program class with Main method, get the person's name and the mobile number to be updated.
+Update the new mobile number if the Person's detail exits and display "Update successfully" on successful updation, else display "Person not found".
+
+To view the table data and the table structure, use script.sql given in the template code.
+Use the mssq.xml code to establish the DB connection to the C# application.
+mssql.xml
+<?xml version="1.0" encoding="utf-8" ?>
+<mssql>
+    <username>sa</username>
+    <password>password</password>
+    <host>localhost</host>
+    <port>1433</port>
+    <schema>EventManagement</schema>
+</mssql>
+
+Input and Output Format:
+Refer sample input and output for formatting specifications.
+All text in bold corresponds to input and the rest corresponds to output.
+
+Sample Input and Output 1 :
+Enter the name
+Albert
+Enter the mobile number
+8675421392
+Update successfully
+
+Sample Input and Output 2 :
+Enter the name
+Charles
+Enter the mobile number
+7589641235
+Person not found
+
+I have the classes as:
+
+using System;
+
+class PersonBO
+{
+	public bool UpdatePerson(string _name, string _mobileNumber)
+    {
+        //fill code here
+    }
+}
+
+script.sql
+
+if exists (SELECT * FROM sysobjects WHERE name = 'person') DROP TABLE person;
+
+CREATE TABLE person
+(
+     id  INT NOT NULL PRIMARY KEY , 
+     name  VARCHAR(255) NOT NULL, 
+     mobile_number  VARCHAR(255) NULL, 
+     username  VARCHAR(255) NOT NULL, 
+     password  VARCHAR(255) NOT NULL
+);
+
+INSERT INTO person VALUES(1, 'Daniel', '987456132', 'daniel', 'daniel123');
+INSERT INTO person VALUES(2, 'Cassandra', '987456132', 'cassandra', 'cassandra123');
+INSERT INTO person VALUES(3, 'Albert', '987456132', 'albert', 'albert123');
+INSERT INTO person VALUES(4, 'Abraham', '987456132', 'abraham', 'abraham123');
+INSERT INTO person VALUES(5, 'Alex', '987456132', 'alex', 'alex123');
+INSERT INTO person VALUES(6, 'Elana', '987456132', 'elana', 'elana123');
+INSERT INTO person VALUES(7, 'Merida', '987456132', 'merida', 'merida123');
+INSERT INTO person VALUES(8, 'Henry', '987456132', 'henry', 'henry123');
+INSERT INTO person VALUES(9, 'Elsa', '987456132', 'elsa', 'elsa123');
+INSERT INTO person VALUES(10, 'Anastasia', '987456132', 'anastasia', 'anastasia123');
+
+using System;
+using System.Data.SqlClient;
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Enter the name");
+        //fill code here
+        Console.WriteLine("Enter the mobile number");
+        //fill code here;
+    }
+
+}
+
+using System;
+using System.Data.SqlClient;
+
+class PersonDAO
+{
+    public bool UpdatePerson(string _name, string _mobileNumber)
+    {
+        //fill code here
+    }
+}
+
+
+mssql.xml:
+
+<?xml version="1.0" encoding="utf-8" ?>
+<mssql>
+    <username>sa</username>
+    <password>password</password>
+    <host>localhost</host>
+    <port>1433</port>
+    <schema>EventManagement</schema>
+</mssql>
+
+
+using System;
+
+class Person
+{
+    private string _name;
+    private string _mobileNumber;
+    private string _username;
+    private string _password;
+
+    public string MobileNumber
+    {
+        get { return this._mobileNumber; }
+
+        set { this._mobileNumber = value; }
+    }
+    public string Name
+    {
+        get { return this._name; }
+
+        set { this._name = value; }
+    }
+
+    public string Username
+    {
+        get { return this._username; }
+
+        set { this._username = value; }
+    }
+    public string Password
+    {
+        get { return this._password; }
+
+        set { this._password = value; }
+    }
+
+    public Person() { }
+
+    public Person(string _name, string _mobileNumber, string _username, string _password)
+    {
+        this._name = _name;
+        this._mobileNumber = _mobileNumber;
+        this._username = _username;
+        this._password = _password;
+    }
+}
+
+
+using System;
+using System.Data.SqlClient;
+using System.Xml;
+using System.IO;
+
+class DBConnection
+{
+    public static SqlConnection GetConnection()
+    {
+        String xmlString = System.IO.File.ReadAllText("mssql.xml");
+
+        string username;
+        string password;
+        string schema;
+        string host;
+
+        //fill code here
+    }
+}
+
+Now finish the codes
+
+Alright 👍 let’s finish this cleanly and correctly, strictly following the OOP structure and naming rules you were given.
+I’ll only fill the missing parts, not redesign anything.
+
+✅ PersonBO.cs
+using System;
+
+class PersonBO
+{
+    public bool UpdatePerson(string _name, string _mobileNumber)
+    {
+        PersonDAO dao = new PersonDAO();
+        return dao.UpdatePerson(_name, _mobileNumber);
+    }
+}
+
+✅ PersonDAO.cs
+using System;
+using System.Data.SqlClient;
+
+class PersonDAO
+{
+    public bool UpdatePerson(string _name, string _mobileNumber)
+    {
+        SqlConnection conn = DBConnection.GetConnection();
+
+        string query =
+            "UPDATE person SET mobile_number = @mobile WHERE name = @name";
+
+        SqlCommand cmd = new SqlCommand(query, conn);
+        cmd.Parameters.AddWithValue("@mobile", _mobileNumber);
+        cmd.Parameters.AddWithValue("@name", _name);
+
+        conn.Open();
+        int rows = cmd.ExecuteNonQuery();
+        conn.Close();
+
+        if (rows > 0)
+            return true;
+        else
+            return false;
+    }
+}
+
+
+✔ If the name exists → rows affected > 0 → true
+✔ If not found → rows = 0 → false
+
+✅ DBConnection.cs
+using System;
+using System.Data.SqlClient;
+using System.Xml;
+using System.IO;
+
+class DBConnection
+{
+    public static SqlConnection GetConnection()
+    {
+        string xmlString = File.ReadAllText("mssql.xml");
+
+        string username = "";
+        string password = "";
+        string host = "";
+        string schema = "";
+
+        using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+        {
+            reader.ReadToFollowing("username");
+            username = reader.ReadElementContentAsString();
+
+            reader.ReadToFollowing("password");
+            password = reader.ReadElementContentAsString();
+
+            reader.ReadToFollowing("host");
+            host = reader.ReadElementContentAsString();
+
+            reader.ReadToFollowing("schema");
+            schema = reader.ReadElementContentAsString();
+        }
+
+        string connectionString =
+            "Data Source=" + host +
+            ";Initial Catalog=" + schema +
+            ";User ID=" + username +
+            ";Password=" + password;
+
+        return new SqlConnection(connectionString);
+    }
+}
+
+✅ Program.cs
+using System;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Enter the name");
+        string name = Console.ReadLine();
+
+        Console.WriteLine("Enter the mobile number");
+        string mobile = Console.ReadLine();
+
+        PersonBO bo = new PersonBO();
+        bool result = bo.UpdatePerson(name, mobile);
+
+        if (result)
+            Console.WriteLine("Update successfully");
+        else
+            Console.WriteLine("Person not found");
+    }
+}
+
+✅ Person.cs (Already correct – no changes)
+
+Your Person class is perfectly implemented and needs no modification.
+
+🎯 Final Behavior
+✔ Sample Input 1
+Enter the name
+Albert
+Enter the mobile number
+8675421392
+Update successfully
+
+✔ Sample Input 2
+Enter the name
+Charles
+Enter the mobile number
+7589641235
+Person not found
+
+🧠 Key Points (Exam / Interview Ready)
+
+DAO handles SQL only
+
+BO acts as business mediator
+
+DBConnection reads from mssql.xml
+
+ExecuteNonQuery() decides success/failure
+
+Clean separation of concerns ✔
+
+
+
+
+
+
+
+
+
