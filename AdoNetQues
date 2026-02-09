@@ -866,4 +866,944 @@ Clean separation of concerns ✔
 
 
 
+Ques 3:
+
+Write a program in C# with SQL Server as the database server to Search and Delete Item Type
+Write a program to search and delete item type details from database using ADO.Net
+
+Create class ItemType with following private attributes/variables
+Data Type	Variable Name
+string	_name
+float	_deposit
+float	_costPerDay
+Include appropriate Properties.
+Include default and parameterized constructor with parameters in the following order.
+public ItemType(string _name, double _deposit, double _costPerDay)
+
+ 
+
+Create class ItemTypeBO with the following method
+
+Method Name	Method Description
+List<ItemType> GetAllItemType()	This method is used to invoke the method GetAllItemType() in ItemTypeDAO class, and returns list of item types.
+bool DeleteItemType(string name)	This method is used to invoke the method DeleteItemType(string name) in ItemTypeDAO class, and returns the status of deletion.
+ItemType GetItemTypeByName(string name)	This method is used to invoke the method GetItemTypeByName(string name) in the ItemTypeDAO class and return the itemType object.
+
+Create class ItemTypeDAO with below methods to handle all database related operations
+
+Method Name	Method Description
+List<ItemType> GetAllItemType()	This method is used to fetch all ItemType details from item_type table
+bool DeleteItemType(string name)	In this method, if the name of the item exits, the item type will be deleted and returns true else return false.
+ItemType GetItemTypeByName(string name)	In this method, retrieved itemType details based on the name and return the itemType object. If item type is not available return null.
+
+Create class DBConnection with the following method.
+
+Method	Description
+public static SqlConnection
+GetConnection()	This method is used to connect the C# application with mssql database. Configure the database properties(fetch from mssql.xml) and return the connection object.
+
+Create Program class with Main method, get Item type name from user.
+If no ItemType is found,display “Invalid input”
+If it is found then delete the item type and display item type list.
+
+Note:
+Print all the Item type details in the following format.
+String.Format("{0,-5}{1,-15} {2,-15} {3}", "Id", "Name", "Deposit", "CostPerDay")
+
+To view the table data and the table structure, use script.sql given in the template code.
+Use mssql.xml code to establish DB connection.
+mssql.xml
+<?xml version="1.0" encoding="utf-8" ?>
+<mssql>
+    <username>sa</username>
+    <password>password</password>
+    <host>localhost</host>
+    <port>1433</port>
+    <schema>DeleteItemType</schema>
+</mssql>
+
+Input and Output Format:
+Refer sample input and output for formatting specifications. 
+All text in bold corresponds to input and the rest corresponds to output.
+
+Sample Input And Output 1:
+
+Menu
+1.Search item type
+2.Delete item type
+1
+Enter the item type name
+Decoration
+Item type Details
+Id: 3
+Name: Decoration
+Deposit: 20000
+Cost per day: 1500
+
+
+Sample Input And Output 2:
+Menu
+1.Search item type
+2.Delete item type
+2
+Enter the item type name
+Decoration
+Deleted successfully
+Item type details
+Id   Name            Deposit         CostPerDay
+1    Interior works  30000           4000
+2    Cosmetics       10000           1000
+4    Party wears     35000           4500
+5    Furnitures      25000           1500
+
+Sample Input And Output 3:
+Menu
+1.Search item type
+2.Delete item type
+3
+Invalid input
+
+I have the codes as:
+using System;
+
+class ItemType
+{
+    private int _id;
+    private string _name;
+    private double _deposit;
+    private double _costPerDay;
+    public ItemType(int _id,string _name, double _deposit, double _costPerDay)
+    {
+        this._id = _id;
+        this._name = _name;
+        this._deposit = _deposit;
+        this._costPerDay = _costPerDay;
+    }
+    public int Id
+    {
+        get
+        {
+            return _id;
+        }
+        set
+        {
+            _id = value;
+        }
+    }
+    public string Name
+    {
+        get
+        {
+            return _name;
+        }
+        set
+        {
+            _name = value;
+        }
+    }
+    public double Deposit
+    {
+        get
+        {
+            return _deposit;
+        }
+        set
+        {
+            _deposit = value;
+        }
+    }
+    public double CostPerDay
+    {
+        get
+        {
+            return _costPerDay;
+        }
+        set
+        {
+            _costPerDay = value;
+        }
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+		Console.WriteLine("Menu");
+		Console.WriteLine("1.Search item type");
+		Console.WriteLine("2.Delete item type");
+		int choice = Convert.ToInt32(Console.ReadLine());
+		if(choice == 1) {
+			Console.WriteLine("Enter the item type name");
+			string searchName = Console.ReadLine();
+			Console.WriteLine("Item type Details");
+			//Fill your code here
+		}
+		else if(choice == 2) {
+			Console.WriteLine("Enter the item type name");
+			string name = Console.ReadLine();
+			bool flag;
+			//Fill your code here
+			if(flag)
+			{
+				Console.WriteLine("Deleted successfully");
+				Console.WriteLine("Item type details");
+				Console.WriteLine(String.Format("{0,-5}{1,-15} {2,-15} {3}", "Id", "Name", "Deposit", "CostPerDay"));
+				//Fill your code here
+			}
+        }
+		else {
+			Console.WriteLine("Invalid input");
+		}
+    }
+}
+
+
+
+using System;
+using System.Collections.Generic;
+
+class ItemTypeBO
+{
+    public List<ItemType> GetAllItemType()
+    {
+        return new ItemTypeDAO().GetAllItemType();
+    }
+
+    public bool DeleteItemType(string name)
+    {
+        return new ItemTypeDAO().DeleteItemType(name);
+    }
+	
+	public ItemType GetItemTypeByName(string name) {
+		return new ItemTypeDAO().GetItemTypeByName(name);
+	}
+}
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Text;
+
+class ItemTypeDAO
+{
+    public List<ItemType> GetAllItemType()
+    {
+        List<ItemType> list = new List<ItemType>();
+        //Fill your code here
+        return list;
+    }
+
+    public bool DeleteItemType(string name)
+    {
+        //Fill your code here
+    }
+	
+	public ItemType GetItemTypeByName(string name) {
+		ItemType itemType = null;
+		//Fill your code here
+        return itemType;
+	}
+}
+
+
+using System;
+using System.Collections.Generic;
+using System.Text;
+using System.IO;
+using System.Xml;
+using System.Data.SqlClient;
+class DBConnection
+{
+    public static SqlConnection GetConnection()
+    {
+        String xmlString = System.IO.File.ReadAllText("mssql.xml");
+
+        string username;
+        string password;
+        string schema;
+        string host;
+
+        using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+        {
+            reader.ReadToFollowing("username");
+            username = reader.ReadElementContentAsString();
+            reader.ReadToFollowing("password");
+            password = reader.ReadElementContentAsString();
+            reader.ReadToFollowing("host");
+            host = reader.ReadElementContentAsString();
+            reader.ReadToFollowing("schema");
+            schema = reader.ReadElementContentAsString();
+        }
+
+        //Fill your code here
+    }
+}
+
+
+
+
+script.sql:
+
+if exists (SELECT * FROM sysobjects WHERE name = 'item_type') DROP TABLE item_type;
+
+CREATE TABLE item_type(
+    id INT NOT NULL IDENTITY,
+    name VARCHAR (255) NOT NULL,
+    deposit decimal(18,0) NOT NULL,
+    costPerDay decimal(18,0) NOT NULL
+    PRIMARY KEY(id)
+);
+
+insert into item_type(name,deposit,costPerDay) values('Interior works',30000,4000);
+insert into item_type(name,deposit,costPerDay) values('Cosmetics',10000,1000);
+insert into item_type(name,deposit,costPerDay) values('Decoration',20000,1500);
+insert into item_type(name,deposit,costPerDay) values('Party wears',35000,4500);
+insert into item_type(name,deposit,costPerDay) values('Furnitures', '25000', 1500);
+
+
+
+
+Now finish the codes
+
+Alright 👍 let’s finish this end-to-end, strictly sticking to the given OOP structure, naming, and output format. I’ll only fill the missing parts, not redesign anything.
+
+✅ Program.cs (Main logic completed)
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        ItemTypeBO bo = new ItemTypeBO();
+
+        Console.WriteLine("Menu");
+        Console.WriteLine("1.Search item type");
+        Console.WriteLine("2.Delete item type");
+        int choice = Convert.ToInt32(Console.ReadLine());
+
+        if (choice == 1)
+        {
+            Console.WriteLine("Enter the item type name");
+            string searchName = Console.ReadLine();
+
+            ItemType item = bo.GetItemTypeByName(searchName);
+
+            if (item == null)
+            {
+                Console.WriteLine("Invalid input");
+            }
+            else
+            {
+                Console.WriteLine("Item type Details");
+                Console.WriteLine("Id: " + item.Id);
+                Console.WriteLine("Name: " + item.Name);
+                Console.WriteLine("Deposit: " + item.Deposit);
+                Console.WriteLine("Cost per day: " + item.CostPerDay);
+            }
+        }
+        else if (choice == 2)
+        {
+            Console.WriteLine("Enter the item type name");
+            string name = Console.ReadLine();
+
+            bool flag = bo.DeleteItemType(name);
+
+            if (flag)
+            {
+                Console.WriteLine("Deleted successfully");
+                Console.WriteLine("Item type details");
+                Console.WriteLine(String.Format("{0,-5}{1,-15} {2,-15} {3}",
+                    "Id", "Name", "Deposit", "CostPerDay"));
+
+                List<ItemType> list = bo.GetAllItemType();
+                foreach (ItemType it in list)
+                {
+                    Console.WriteLine(String.Format("{0,-5}{1,-15} {2,-15} {3}",
+                        it.Id, it.Name, it.Deposit, it.CostPerDay));
+                }
+            }
+            else
+            {
+                Console.WriteLine("Invalid input");
+            }
+        }
+        else
+        {
+            Console.WriteLine("Invalid input");
+        }
+    }
+}
+
+✅ ItemTypeDAO.cs (Database operations completed)
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+
+class ItemTypeDAO
+{
+    public List<ItemType> GetAllItemType()
+    {
+        List<ItemType> list = new List<ItemType>();
+        SqlConnection conn = DBConnection.GetConnection();
+
+        string query = "SELECT id, name, deposit, costPerDay FROM item_type";
+        SqlCommand cmd = new SqlCommand(query, conn);
+
+        conn.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            ItemType item = new ItemType(
+                Convert.ToInt32(reader["id"]),
+                reader["name"].ToString(),
+                Convert.ToDouble(reader["deposit"]),
+                Convert.ToDouble(reader["costPerDay"])
+            );
+            list.Add(item);
+        }
+
+        reader.Close();
+        conn.Close();
+
+        return list;
+    }
+
+    public bool DeleteItemType(string name)
+    {
+        SqlConnection conn = DBConnection.GetConnection();
+        string query = "DELETE FROM item_type WHERE name = @name";
+
+        SqlCommand cmd = new SqlCommand(query, conn);
+        cmd.Parameters.AddWithValue("@name", name);
+
+        conn.Open();
+        int rows = cmd.ExecuteNonQuery();
+        conn.Close();
+
+        return rows > 0;
+    }
+
+    public ItemType GetItemTypeByName(string name)
+    {
+        ItemType itemType = null;
+        SqlConnection conn = DBConnection.GetConnection();
+
+        string query =
+            "SELECT id, name, deposit, costPerDay FROM item_type WHERE name = @name";
+
+        SqlCommand cmd = new SqlCommand(query, conn);
+        cmd.Parameters.AddWithValue("@name", name);
+
+        conn.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        if (reader.Read())
+        {
+            itemType = new ItemType(
+                Convert.ToInt32(reader["id"]),
+                reader["name"].ToString(),
+                Convert.ToDouble(reader["deposit"]),
+                Convert.ToDouble(reader["costPerDay"])
+            );
+        }
+
+        reader.Close();
+        conn.Close();
+
+        return itemType;
+    }
+}
+
+✅ DBConnection.cs (Completed)
+using System;
+using System.IO;
+using System.Xml;
+using System.Data.SqlClient;
+
+class DBConnection
+{
+    public static SqlConnection GetConnection()
+    {
+        string xmlString = File.ReadAllText("mssql.xml");
+
+        string username = "";
+        string password = "";
+        string host = "";
+        string schema = "";
+
+        using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+        {
+            reader.ReadToFollowing("username");
+            username = reader.ReadElementContentAsString();
+
+            reader.ReadToFollowing("password");
+            password = reader.ReadElementContentAsString();
+
+            reader.ReadToFollowing("host");
+            host = reader.ReadElementContentAsString();
+
+            reader.ReadToFollowing("schema");
+            schema = reader.ReadElementContentAsString();
+        }
+
+        string connectionString =
+            "Data Source=" + host +
+            ";Initial Catalog=" + schema +
+            ";User ID=" + username +
+            ";Password=" + password;
+
+        return new SqlConnection(connectionString);
+    }
+}
+
+✅ ItemType.cs & ItemTypeBO.cs
+
+No changes needed — both are already correct 👍
+
+🎯 Final Behavior (Matches Samples)
+✔ Search
+
+Valid name → displays full item details
+
+Invalid name → Invalid input
+
+✔ Delete
+
+Valid name → deletes + prints updated list
+
+Invalid name → Invalid input
+
+✔ Menu
+
+Any option other than 1 or 2 → Invalid input
+
+
+
+
+
+
+
+
+
+Ques 4:
+
+Write a program in C# with SQL Server as the database server to Event Details – Stored Procedure
+Write a program to get and display event details which is stored in the procedure.
+
+[Note :  Strictly adhere to the object-oriented specifications given as a part of the problem statement.
+Follow the naming conventions as mentioned. Create separate classes in separate files.]
+
+Consider the class Event with the following private attributes.
+Data Type	Attributes
+string	_name
+string	_type
+string	_organizer
+
+The methods for getters, setters and constructors are given in the template code.
+
+Consider the class EventBO and define the following method
+Method Name	Description
+public List<Event> GetAllEvents()	In this method, call the GetAllEvents() method in EventDAO class and return the list of events.
+
+
+Consider the class EventDAO and define the following method
+Method Name	Description
+public List<Event> GetAllEvents()	This method is used to fetch all the details of events from stored procedure name ‘stpGetAllEvents’ and return the list of events.
+The procedure returns the event details in the following order name, type and organizer.
+
+Consider the class DBConnection and define the following method.
+
+Method Name	Description
+public static SqlConnection GetConnection()	This method is used to connect the Csharp application with mssql database.
+Configure the database properties (fetch from mssql.xml) and return the connection object.
+
+
+Consider the class Program. It includes the method Main.
+In the Main method, get the list of event objects using GetAllEvents method in EventBO class and display all the events in the given format.
+
+
+The link to download the template code is given below
+Code Template
+
+To view the table data and the table structure, use script.sql given in the template code.
+
+Table properties :
+create table event (
+id int not null,
+name varchar(255) not null,
+type varchar(255) not null,
+start_date date not null,
+end_date date not null,
+organizer varchar(255) not null
+);
+
+Use mssql.xml code to establish DB Connection.
+mssql.xml
+<?xml version="1.0" encoding="utf-8" ?>
+<mssql>
+    <username>sa</username>
+    <password>password</password>
+    <host>localhost</host>
+    <port>1433</port>
+    <schema>EventManagement</schema>
+</mssql>
+
+
+Input and Output Format:
+
+Display the list of event details in the insertion order.
+Use the below format to display event details
+String.Format("{0,-25} {1,-15} {2}", "Name", "Type", "Organizer")
+Refer sample input and output for formatting specifications.
+
+[All text in bold corresponds to input and the rest corresponds to output.]
+
+Sample Input and Output :
+Event details
+Name                      Type            Organizer
+Magic Show                Stage Show      Cassandra
+Sky Lantern Festival      Stage Show      Daniel
+Rio Carnival              Exhibition      Albert
+Songkran                  Exhibition      Abraham
+Cannes film festival      Stage Show      Alex
+Glastonbury               Exhibition      Elana
+Tomorrowland              Exhibition      Merida
+TrickEye                  Exhibition      Henry
+Edinburgh fringe festival Stage Show      Elsa
+Comic con International   Stage Show      Anastasia
+
+
+I have the codes as:
+
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+
+class EventDAO
+{
+    public List<Event> GetAllEvents()
+    {
+        List<Event> events = new List<Event>();
+        //Fill your code here
+        return events;
+    }
+}
+
+using System;
+
+class Event
+{
+    private string _name;
+    private string _type;
+    private string _organizer;
+
+    public string Name
+    {
+        get { return this._name; }
+        set { this._name = value; }
+    }
+
+    public string Type
+    {
+        get { return this._type; }
+        set { this._type = value; }
+    }
+
+    public string Organizer
+    {
+        get { return this._organizer; }
+        set { this._organizer = value; }
+    }
+	
+    public Event() { }
+
+    public Event(string _name, string _type, string _organizer)
+    {
+        this._name = _name;
+        this._type = _type;
+        this._organizer = _organizer;
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Event details");
+		Console.WriteLine(String.Format("{0,-25} {1,-15} {3}", "Name", "Type", "Organizer"));
+		//Fill your code here
+    }
+}
+
+using System;
+using System.Collections.Generic;
+
+class EventBO
+{
+    public List<Event> GetAllEvents()
+    {
+        List<Event> events = new List<Event>();
+        //Fill your code here
+        return events;
+    }
+}
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.Xml;
+using System.IO;
+class DBConnection
+{
+    public static SqlConnection GetConnection()
+    {
+        String xmlString = System.IO.File.ReadAllText("mssql.xml");
+
+        string username;
+        string password;
+        string schema;
+        string host;
+
+        using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+        {
+            reader.ReadToFollowing("username");
+            username = reader.ReadElementContentAsString();
+            reader.ReadToFollowing("password");
+            password = reader.ReadElementContentAsString();
+            reader.ReadToFollowing("host");
+            host = reader.ReadElementContentAsString();
+            reader.ReadToFollowing("schema");
+            schema = reader.ReadElementContentAsString();
+        }
+
+        SqlConnection conn = null;
+        //Fill your code here
+        return conn;
+
+    }
+}
+
+
+
+
+mssql.xml:
+
+<?xml version="1.0" encoding="utf-8" ?>
+<mssql>
+    <username>sa</username>
+    <password>password</password>
+    <host>localhost</host>
+    <port>1433</port>
+    <schema>EventManagement</schema>
+</mssql>
+
+
+script.sql:
+
+if exists (SELECT * FROM sysobjects WHERE name = 'event') DROP TABLE event;
+
+create table event (
+    id int not null,
+    name varchar(255) not null,
+    type varchar(255) not null,
+    start_date date not null,
+    end_date date not null,
+    organizer varchar(255) not null
+);
+
+insert into event Values(1, 'Magic Show', 'Stage Show', '2018-02-01', '2018-02-03', 'Cassandra');
+insert into event Values(2, 'Sky Lantern Festival', 'Stage Show', '2018-02-01', '2018-02-03', 'Daniel');
+insert into event Values(3, 'Rio Carnival', 'Exhibition', '2018-02-01', '2018-02-03', 'Albert');
+insert into event Values(4, 'Songkran', 'Exhibition', '2018-02-01', '2018-02-03', 'Abraham');
+insert into event Values(5, 'Cannes film festival', 'Stage Show', '2018-02-01', '2018-02-03', 'Alex');
+insert into event Values(6, 'Glastonbury', 'Exhibition', '2018-02-01', '2018-02-03', 'Elana');
+insert into event Values(7, 'Tomorrowland', 'Exhibition', '2018-02-01', '2018-02-03', 'Merida');
+insert into event Values(8, 'TrickEye', 'Exhibition', '2018-02-01', '2018-02-03', 'Henry');
+insert into event Values(9, 'Edinburgh fringe festival', 'Stage Show', '2018-02-01', '2018-02-03', 'Elsa');
+insert into event Values(10, 'Comic con International', 'Stage Show', '2018-02-01', '2018-02-03', 'Anastasia');
+CREATE PROCEDURE stpGetAllEvents
+AS  
+BEGIN 
+    Select name, type, organizer from event
+END  
+
+
+
+Now finish the codes
+
+
+
+Perfect 👍 This is a classic ADO.NET + Stored Procedure + OOP problem.
+I’ll only complete the missing parts, strictly following the structure and naming you were given.
+
+✅ EventDAO.cs (Stored Procedure call)
+using System;
+using System.Collections.Generic;
+using System.Data.SqlClient;
+
+class EventDAO
+{
+    public List<Event> GetAllEvents()
+    {
+        List<Event> events = new List<Event>();
+
+        SqlConnection conn = DBConnection.GetConnection();
+        SqlCommand cmd = new SqlCommand("stpGetAllEvents", conn);
+        cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+        conn.Open();
+        SqlDataReader reader = cmd.ExecuteReader();
+
+        while (reader.Read())
+        {
+            Event e = new Event(
+                reader[0].ToString(),   // name
+                reader[1].ToString(),   // type
+                reader[2].ToString()    // organizer
+            );
+            events.Add(e);
+        }
+
+        reader.Close();
+        conn.Close();
+
+        return events;
+    }
+}
+
+✅ EventBO.cs (Business Layer)
+using System;
+using System.Collections.Generic;
+
+class EventBO
+{
+    public List<Event> GetAllEvents()
+    {
+        EventDAO dao = new EventDAO();
+        return dao.GetAllEvents();
+    }
+}
+
+✅ Program.cs (Main logic + display)
+
+⚠️ Note: There is a small typo in your header format string ({3} instead of {2}).
+I’m fixing it so output matches the sample.
+
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    static void Main(string[] args)
+    {
+        Console.WriteLine("Event details");
+        Console.WriteLine(String.Format("{0,-25} {1,-15} {2}",
+            "Name", "Type", "Organizer"));
+
+        EventBO bo = new EventBO();
+        List<Event> events = bo.GetAllEvents();
+
+        foreach (Event e in events)
+        {
+            Console.WriteLine(String.Format("{0,-25} {1,-15} {2}",
+                e.Name, e.Type, e.Organizer));
+        }
+    }
+}
+
+✅ DBConnection.cs (Completed)
+using System;
+using System.Data.SqlClient;
+using System.Xml;
+using System.IO;
+
+class DBConnection
+{
+    public static SqlConnection GetConnection()
+    {
+        string xmlString = File.ReadAllText("mssql.xml");
+
+        string username = "";
+        string password = "";
+        string host = "";
+        string schema = "";
+
+        using (XmlReader reader = XmlReader.Create(new StringReader(xmlString)))
+        {
+            reader.ReadToFollowing("username");
+            username = reader.ReadElementContentAsString();
+
+            reader.ReadToFollowing("password");
+            password = reader.ReadElementContentAsString();
+
+            reader.ReadToFollowing("host");
+            host = reader.ReadElementContentAsString();
+
+            reader.ReadToFollowing("schema");
+            schema = reader.ReadElementContentAsString();
+        }
+
+        string connectionString =
+            "Data Source=" + host +
+            ";Initial Catalog=" + schema +
+            ";User ID=" + username +
+            ";Password=" + password;
+
+        return new SqlConnection(connectionString);
+    }
+}
+
+✅ Event.cs
+
+No changes needed — already correct ✔️
+
+🎯 Final Output (Matches Sample Exactly)
+Event details
+Name                      Type            Organizer
+Magic Show                Stage Show      Cassandra
+Sky Lantern Festival      Stage Show      Daniel
+Rio Carnival              Exhibition      Albert
+Songkran                  Exhibition      Abraham
+Cannes film festival      Stage Show      Alex
+Glastonbury               Exhibition      Elana
+Tomorrowland              Exhibition      Merida
+TrickEye                  Exhibition      Henry
+Edinburgh fringe festival Stage Show      Elsa
+Comic con International   Stage Show      Anastasia
+
+🧠 What this demonstrates (Very exam-friendly)
+
+✔ Stored procedure execution using SqlCommand
+
+✔ CommandType.StoredProcedure
+
+✔ Clean DAO–BO–Model separation
+
+✔ XML-based DB configuration
+
+✔ Proper formatting output
+
+
+
+
+
+
+
 
