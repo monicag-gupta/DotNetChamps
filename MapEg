@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>HTML Image Map Example</title>
+</head>
+<body>
+
+<h2>Click on Parts of the Image Below</h2>
+
+<!-- Image with usemap attribute linking to a map named "worldmap" -->
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/80/World_map_-_low_resolution.svg/1280px-World_map_-_low_resolution.svg.png"
+     alt="World Map"
+     width="800"
+     usemap="#worldmap">
+
+<!-- Define the map and clickable areas -->
+<map name="worldmap">
+    <!-- Rectangular area over North America -->
+    <area shape="rect"
+          coords="50,50,300,200"
+          href="https://en.wikipedia.org/wiki/North_America"
+          alt="North America">
+
+    <!-- Circular area over Europe -->
+    <area shape="circle"
+          coords="450,140,80"
+          href="https://en.wikipedia.org/wiki/Europe"
+          alt="Europe">
+
+    <!-- Polygon (triangle) over Australia -->
+    <area shape="poly"
+          coords="700,400,760,500,640,500"
+          href="https://en.wikipedia.org/wiki/Australia"
+          alt="Australia">
+</map>
+
+</body>
+</html>
