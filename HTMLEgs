@@ -1,0 +1,248 @@
+first.html
+
+<html>
+    <head>
+        <title>
+            My HTML Page
+        </title>
+    </head>
+    <body>
+        <br/>
+        <a href="star.bmp" target="_blank">
+            <img src="star.bmp" height="100" 
+            width="100" alt="The Star bmp file"/>
+        </a>
+        <br/>
+        <p>Para 1</p>
+        <p>Para 2</p>
+        <div>Division 1</div>
+        <div>Division 2</div>
+        <a name="topOfPage"></a>
+        <a href="http://www.google.com" target="_blank">Google Page</a>
+        <br/>
+        <a href="#Vegetables">Veggies</a>
+
+        <p> <em>Wow!</em>
+            This is a <b>C#</b> 
+            <strong>Coding</strong> 
+            <i>Session</i>
+        </p>
+        <font face="Arial" size="2" color="red">
+            Font face Arial with size 20 and color red
+        </font>
+
+        <!-- This is a comment -->
+        <p>
+            This is a paragraph with space
+             <br/>
+            before and after the para.
+        </p>
+        <hr/>
+        <table border="1" cellspacing="10" cellpadding="10">
+            <tr>
+                <th>Name</th>
+                <th>ID</th>
+            </tr>
+            <tr>
+                <td>John Doe</td>
+                <td>101</td>
+            </tr>
+            <tr>
+                <td>Jane Smith</td>
+                <td>102</td>
+            </tr>
+        </table>
+        <h1>Biggest Heading</h1>
+        <h2>2nd Biggest</h2>
+        <h3>3rd Biggest</h3>
+        <h4>4th biggest</h4>
+        <h5>5th Biggest</h5>
+        <h6>Smallest Heading</h6>
+        <ol type="1">Fruits:
+            <li>Apple</li>
+            <li>Pears</li>
+            <li>Oranges</li>
+        </ol>
+        <ol type="a">Fruits:
+            <li>Apple</li>
+            <li>Pears</li>
+            <li>Oranges</li>
+        </ol>
+        <ol type="I">Fruits:
+            <li>Apple</li>
+            <li>Pears</li>
+            <li>Oranges</li>
+        </ol>
+        <a name="Vegetables"></a>
+        <h3><a href="#topOfPage">Top of the page</a></h3>
+        <ul>Vegs:
+            <a href="https://en.wikipedia.org/wiki/Potato" target="_blank">
+                <li>Potato</li>
+            </a>
+            <li>Tomato</li>
+            <li>Onion</li>
+        </ul>
+        Hello Coders!
+    </body>
+</html>
+
+
+
+
+footer.html
+
+<html>
+    <body>
+        <hr/>
+        <p>
+            <span>Home</span>
+            <span>ContactUs</span>
+            <span>AboutUs</span>
+            <span>Products</span>
+        </p>
+    </body>
+</html>
+
+
+
+
+
+header.html
+
+<html>
+    <body>
+        <p>
+            <span>Home</span>
+            <span>ContactUs</span>
+            <span>AboutUs</span>
+            <span>Products</span>
+        </p>
+        <hr/>
+    </body>
+</html>
+
+
+
+
+
+
+home.html
+
+<html>
+    <body>
+        <h1>
+            This Page is about my Company 
+            HCL Tech.
+        </h1>
+        <h2>
+            This Site informs about 
+            the details
+        </h2>
+    </body>
+</html>
+
+
+
+
+
+side.html
+
+<html>
+    <body>
+        <ul>
+            <li>Home</li>
+            <li>Site</li>
+            <li>Contact us</li>
+            <li>About us</li>
+            <li>Products</li>
+        </ul>
+    </body>
+</html>
+
+
+
+
+site.html
+
+<html>
+    <head>
+        <title>My Site: Best Company</title>
+    </head>
+    <frameset rows="30,*">
+        <frame src="header.html"/>
+        <frameset rows="300,*">
+            <frameset cols="150,*">
+                <frame src="side.html"/>
+                <frame src="home.html"/>
+            </frameset>            
+            <frame src="footer.html"/>
+        </frameset>
+    </frameset>
+</html>
+
+
+
+
+
+formEg.html
+
+<html>
+    <head>
+        <title>
+            Fill your details
+        </title>
+    </head>
+    <body>
+        <form action="submitted.html">
+            Name: <input type="text" name="uname"/><br/>
+            Password: <input type="password" name="pass"/><br/>
+            Subject:
+            <input type="radio" name="sub" value="Java"/> Java
+            <input type="radio" name="sub" value=".Net"/> .Net
+            <br/> 
+            Topics Completed:
+            <input type="checkbox" name="topics" value="C#"/> C#
+            <input type="checkbox" name="topics" value="SQL"/> SQLServer
+            <input type="checkbox" name="topics" value="HTML"/> HTML
+            <br/> 
+            <input type="button" value="Click me"/><br/>
+            Choose file:<input type="file" name="fileName"/><br/>
+            <input type="hidden" name="secretpasskey" value="1234"/>
+            Region: 
+            <select name="region">
+                <option value="North">North</option>
+                <option value="South">South</option>
+                <option value="Central">Central</option>
+            </select>
+            <br/>
+            Address:
+            <textarea rows="4" cols="20" name="address"></textarea>
+            <br/>
+            <input type="reset"/>
+            <input type="submit"/>
+
+        </form>
+    </body>
+</html>
+
+
+
+
+
+submitted.html
+
+<html>
+    <head>
+        <title>Welcome Page</title>
+    </head>
+    <body>
+        <h1>
+            Welcome to my site
+        </h1>
+    </body>
+</html>
+
+
+
+
+
