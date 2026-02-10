@@ -145,19 +145,43 @@ home.html
 
 
 
+products.html
+
+<html>
+    <body>
+        <ol type="i">
+            <li>Laptop</li>
+            <li>Mouse</li>
+            <li>Charger</li>
+        </ol>
+    </body>
+</html>
+
+
+
+
+
 side.html
 
 <html>
     <body>
         <ul>
-            <li>Home</li>
+            <li>
+                <a href="home.html" target="main">Home</a>
+            </li>
             <li>Site</li>
             <li>Contact us</li>
             <li>About us</li>
-            <li>Products</li>
+            <li>
+                <a href="products.html" target="main">
+                    Products
+                </a>
+            </li>
         </ul>
     </body>
 </html>
+
+
 
 
 
@@ -173,7 +197,7 @@ site.html
         <frameset rows="300,*">
             <frameset cols="150,*">
                 <frame src="side.html"/>
-                <frame src="home.html"/>
+                <frame src="home.html" name="main"/>
             </frameset>            
             <frame src="footer.html"/>
         </frameset>
