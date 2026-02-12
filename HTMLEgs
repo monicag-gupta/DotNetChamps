@@ -268,5 +268,39 @@ submitted.html
 
 
 
+formsEg.html
 
+<html>
+    <head>
+        <title>Forms Eg</title>
+    </head>
+    <body>
+        <form action="first.html" method="post">
+            <label for="nameId">Username: </label>
+            <input type="text" name="a" id="nameId"
+            placeholder="Enter Name:" required  
+            autocomplete="given-name">
+            <br/>
+            <label for="passId">Password: </label>
+            <input type="password" name="a" id="passId"
+            placeholder="Enter Password:" required>
+            <br/>
+            Email: <input type="email"><br/>
+            url: <input type="url"><br/>
+            Age: <input type="number" min="0" max="150"><br/>
+            <select>
+                <option>C#</option>
+                <optgroup label="C Family">
+                    <option>C++</option><option>C</option>
+                </optgroup>
+                <option>Java</option>
+                <optgroup label="Web Family">
+                    <option>HTML</option><option>CSS</option>
+                </optgroup>
+                <option>Asp.Net</option>
+            </select> <br/>
+            <input type="submit">
+        </form>
+    </body>
+</html>
 
