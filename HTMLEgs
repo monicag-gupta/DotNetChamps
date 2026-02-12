@@ -304,3 +304,30 @@ formsEg.html
     </body>
 </html>
 
+
+
+
+<html>
+    <head><title>JS Eg</title></head>
+    <body>
+        x: <input type="text" id="x"/><br/>
+        y: <input type="text" id="y"/><br/>
+        <button onclick="add();">+</button> 
+        <button onclick="sub();">-</button>
+        <h3>Result: <div id="result"></div></h3>
+        <script type="text/javascript">
+            function add(){
+                var a=document.getElementById("x").value;
+                var b=document.getElementById("y").value;
+                var res = parseInt(a) + parseInt(b);
+                document.getElementById("result").innerHTML=res;
+            }
+            function sub(){
+                var a=document.getElementById("x").value;
+                var b=document.getElementById("y").value;
+                var res = parseInt(a) - parseInt(b);
+                document.getElementById("result").innerHTML=res;
+            }
+        </script>
+    </body>
+</html>
