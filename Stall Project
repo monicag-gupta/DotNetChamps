@@ -1,0 +1,417 @@
+Q-1
+Stall Management
+Write a program to create, update and delete stall details from database using ADO.NET.
+
+[Note : Strictly adhere to the object oriented specifications given as a part of the problem statement.
+Follow the naming conventions as mentioned. Create separate classes in separate files.]
+
+Consider a class Stall with the following private attributes.
+Data Type	Attributes
+int	_id
+string	_name
+string	_category
+string	_owner
+The methods for getters, setters and constructors are given in the template code.
+ 
+Consider a class StallBO and define the following method.
+Method Name	Description
+public bool InsertStall(Stall stall)	In this method, call the InsertStall() method in StallDAO and return the bool value indicating the status of insertion.
+public bool UpdateStall(int stallId, string category)	In this method, call the UpdateStall() method in StallDAO and return bool value indicating the status of updation.
+public bool DeleteStall(int stallId)	In this method, call the DeleteStall() method in StallDAO and return bool value indicating the status of deletion.
+public void DisplayStalls()	In this method, call GetAllStall() method in StallDAO and display the stall details. If stall list is empty, display ‘No available stalls’
+
+Consider a class StallDAO and define the following methods.
+Method Name	Description
+public bool InsertStall(Stall stall)	In this method, insert the stall object to stall table in database and return the insert status as boolean value.
+public bool UpdateStall(int stallId, string category)	In this method, update category of a stall based on the stall id and return the update status as a boolean value.
+public bool DeleteStall(int stallId)	In this method, delete the stall details from the stall table based on the stall id and return the delete status as a boolean value.
+public List<Stall> GetAllStall()	In this method, get all the stall details from the stall table and convert it into list of stall objects. Return the list of stall objects.
+ 
+Consider the class DBConnection and define the following method.
+Method Name	Description
+public static SqlConnection GetConnection()	This method is used to connect the Csharp application with mssql database.
+Configure the database properties (fetch from mssql.xml) and return the connection object.
+ 
+Consider the class Program. It includes the method Main.
+In the Main method, read the stall details from the user. Display the menu and call the appropriate methods in StallBO to perform the requested operations.
+Display “Inserted successfully” after every successful insertion of stall and same for update and delete.
+Display ‘Invalid input’ if the updation and deletion of a stall is not successfull.
+Display ‘Invalid input’ if the user selects invalid choice of menu.
+
+The link to download the template code is given below
+Code Template
+
+To view the table data and the table structure, use script.sql given in the template code.
+Table properties :
+CREATE TABLE stall(
+    id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    category VARCHAR(255) NOT NULL,
+    owner VARCHAR(255) NOT NULL
+);
+
+Use mssql.xml code to establish DB connection in C# application.
+mssql.xml
+<?xml version="1.0" encoding="utf-8" ?>
+<mssql>
+    <username>sa</username>
+    <password>password</password>
+    <host>localhost</host>
+    <port>1433</port>
+    <schema>StallManagement</schema>
+</mssql>
+
+
+Input and Output Format :
+If the selected menu option is invalid then display “Invalid input”.
+Display the stall details in insertion order.
+Use the below format to display the stall details.
+String.Format("{0,-5} {1,-15} {2,-15} {3}",  "Id", "Name", "Category", "Owner")
+Refer sample input and output for formatting specifications.
+
+[All text in bold corresponds to the input and the rest corresponds to output.]
+
+Sample Input and Output 1:
+Menu
+1.Insert stall
+2.Update category
+3.Delete stall
+4.Exit
+1
+Enter the stall details(name,category,owner)
+Madisoon,Promotional,Albert
+Inserted successfully
+Id    Name            Category        Owner
+1     Wok and roll    Promotional     Clarke
+2     Madisoon        Promotional     Albert
+Menu
+1.Insert stall
+2.Update category
+3.Delete stall
+4.Exit
+2
+Enter the stall id
+2
+Enter the category
+Maxima
+Updated successfully
+Menu
+1.Insert stall
+2.Update category
+3.Delete stall
+4.Exit
+3
+Enter the stall id
+1
+Deleted successfully
+Menu
+1.Insert stall
+2.Update category
+3.Delete stall
+4.Exit
+2
+Enter the stall id
+1
+Enter the category
+Maxima
+Invalid input
+Menu
+1.Insert stall
+2.Update category
+3.Delete stall
+4.Exit
+3
+Enter the stall id
+1
+Invalid input
+Menu
+1.Insert stall
+2.Update category
+3.Delete stall
+4.Exit
+5
+Invalid input
+
+
+Q-2
+Hall Management
+Write a program to create, update and delete hall details from database using ADO.NET.
+
+[Note : Strictly adhere to the object oriented specifications given as a part of the problem statement.
+Follow the naming conventions as mentioned. Create separate classes in separate files.]
+
+Consider the class Hall with the following private attributes.
+Data type	Attributes
+int	_id
+string	_name
+string	_mobileNumber
+double	_costPerDay
+string	_owner
+The methods for getters, setters and constructors are given in the template code.
+
+Consider the class HallBO and define the following methods
+Method Name	Description
+public bool InsertHall(Hall hall)	In this method, call the InsertHall() method in HallDAO and return the bool value indicating the status of insertion.
+public bool UpdateHall(int hallId, double costPerDay)	In this method, call the UpdateHall() method in HallDAO and return bool value indicating the status of updation.
+public bool DeleteHall(int hallId)	In this method, call the DeleteHall() method in HallDAO and return bool value indicating the status of deletion.
+public void DisplayHalls()	In this method, call GetAllHall() method in HallDAO and display the hall details. If hall list is empty, display ‘No hall available’.
+
+Consider the class HallDAO and define the following methods.
+Method Name	Description
+public bool InsertHall(Hall hall)	In this method, insert the hall object to hall table in database and return the insert status as bool value.
+public bool UpdateHall(int hallId, double costPerDay)	In this method, update cost per day of a hall based on the hall id and return the update status as a bool value.
+public bool DeleteHall(int hallId)	In this method, delete the hall details from the hall table based on the hall id and return the delete status as a boolean value.
+public List<Hall> GetAllHall()	In this method, get all the hall details from the hall table and convert it into list of hall objects. Return the list of hall objects.
+ 
+Consider the class DBConnection and define the following method.
+Method Name	Description
+public static SqlConnection GetConnection()	This method is used to connect the Csharp application with mssql database.
+Configure the database properties (fetch from mssql.xml) and return the connection object.
+ 
+Consider the class Program. It includes the method Main.
+In the Main method, read the hall details from the user. Display the menu and call the appropriate methods in HallBO to perform the requested operations.
+Display the message “Hall inserted successfully” after every successful insertion of hall and same for update and delete.
+Display ‘Invalid hall id’ if the updation and deletion of a hall is not successfull.
+Display ‘Invalid input’ if the user selects invalid choice of menu.
+
+The link to download the template code is given below
+Code Template
+
+To view the table data and the table structure, use script.sql given in the template code.
+
+Table properties :
+CREATE TABLE hall(
+    id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    mobile_number VARCHAR(255) NOT NULL,
+    cost_per_day FLOAT NOT NULL,
+    owner VARCHAR(255) NOT NULL
+);
+
+Use mssql.xml code to establish DB connection.
+<?xml version="1.0" encoding="utf-8" ?>
+<mssql>
+  <username>sa</username>
+  <password>password</password>
+  <host>localhost</host>
+  <port>1433</port>
+  <schema>HallManagement</schema>
+</mssql>
+
+
+Input and Output Format :
+Display the hall details in insertion order.
+Use the below format to display the hall details.
+String.Format("{0,-5} {1,-20} {2,-15} {3,-10} {4}", "Id", "Name", "Mobile number", "Cost per day", "Owner")
+Refer sample input and output for formatting specifications.
+
+[All text in bold corresponds to the input and the rest corresponds to output.]
+
+Sample Input and Output 1:
+Menu
+1.Insert hall
+2.Update cost per day
+3.Delete hall
+4.Exit
+1
+Enter the hall name
+Hall Magica
+Enter the mobile number
+9123458760
+Enter the cost per day
+50000
+Enter the owner name
+Clarke
+Hall inserted successfully
+Id    Name                 Mobile number   Cost per day Owner
+1     Hall Paradise        9876543210      40000      Steve Jobs
+2     Hall Magica          9123458760      50000      Clarke
+Menu
+1.Insert hall
+2.Update cost per day
+3.Delete hall
+4.Exit
+2
+Enter the hall id
+2
+Enter the cost per day
+45999
+Hall updated successfully
+Menu
+1.Insert hall
+2.Update cost per day
+3.Delete hall
+4.Exit
+3
+Enter the hall id
+1
+Hall deleted successfully
+Menu
+1.Insert hall
+2.Update cost per day
+3.Delete hall
+4.Exit
+2
+Enter the hall id
+1
+Enter the cost per day
+60000
+Invalid hall id
+Menu
+1.Insert hall
+2.Update cost per day
+3.Delete hall
+4.Exit
+3
+Enter the hall id
+1
+Invalid hall id
+Menu
+1.Insert hall
+2.Update cost per day
+3.Delete hall
+4.Exit
+5
+Invalid input
+
+Q-3-
+
+Cake Shop
+Write a program to create, update and delete cake details from database using ADO.NET.
+
+[Note : Strictly adhere to the object oriented specifications given as a part of the problem statement.
+Follow the naming conventions as mentioned. Create separate classes in separate files.]
+
+Consider a class Cake with the following private attributes.
+Data type	Attributes
+int	_id
+string	_name
+string	_flavor
+string	_weight
+double	_price
+The methods for getters, setters and constructors are given in the template code.
+
+Consider a class CakeBO and define the following methods.
+Method Name	Description
+public bool InsertCake(Cake cake)	In this method, call the InsertCake() method in CakeDAO and return the bool value indicating the status of insertion.
+public bool UpdateCake(int cakeId, double price)	In this method, call the UpdateCake() method in CakeDAO and return bool value indicating the status of updation.
+public bool DeleteCake(int cakeId)	In this method, call the DeleteCake() method in CakeDAO and return bool value indicating the status of deletion.
+public void DisplayCakes()	In this method, call GetAllCake() method in CakeDAO and display the cake details. If cake list is empty, display ‘No cake available’
+
+Consider a class CakeDAO and define the following methods.
+Method Name	Description
+public bool InsertCake(Cake cake)	In this method, insert the cake object to cake table in database and return the insert status as boolean value.
+public bool UpdateCake(int cakeId, double price)	In this method, update price of a cake based on the cake id and return the update status as a boolean value.
+public bool DeleteCake(int cakeId)	In this method, delete the cake details from the cake table based on the cake id and return the delete status as a boolean value.
+public List<Cake> GetAllCake()	In this method, get all the cake details from the cake table and convert it into list of cake objects. Return the list of cake objects.
+ 
+Consider the class DBConnection and define the following method.
+Method Name	Description
+public static SqlConnection GetConnection()	This method is used to connect the Csharp application with mssql database.
+Configure the database properties (fetch from mssql.xml) and return the connection object.
+ 
+Consider the class Program. It includes the method Main.
+In the Main method, read the cake details from the user. Display the menu and call the appropriate methods in CakeBO to perform the requested operations.
+Display the message “Inserted successfully” after every successful insertion of cake details. Display the message for update and delete.
+Display ‘Invalid cake id’ if the updation and deletion of a cake is not successfull.
+Display ‘Invalid input’ if the user selects invalid choice of menu.
+
+The link to download the template code is given below
+Code Template
+
+To view the table data and the table structure, use script.sql given in the template code.
+Table properties :
+create table cake(
+    id int not null identity(1,1) primary key,
+    name varchar(255) not null,
+    flavor varchar(255) not null,
+    weight varchar(255) not null,
+    price float not null
+);
+
+Use mssql.xml code to establish DB connection in C# application.
+mssql.xml
+<?xml version="1.0" encoding="utf-8" ?>
+<mssql>
+    <username>sa</username>
+    <password>password</password>
+    <host>localhost</host>
+    <port>1433</port>
+    <schema>CakeManagement</schema>
+</mssql>
+
+Input and Output Format :
+If the selected menu option is invalid then display “Invalid input”.
+Display the cake details in insertion order.
+Use the below format to display the cake details.
+String.Format("{0,-5}{1,-15}{2,-15}{3,-10}{4}", "Id", "Name", "Flavor", "Weight", "Price")
+Refer sample input and output for formatting specifications.
+
+[All text in bold corresponds to the input and the rest corresponds to output.]
+
+Sample Input and Output 1 :
+Menu
+1.Insert cake
+2.Update price
+3.Delete cake
+4.Exit
+1
+Enter cake details(name,flavor,weight,price)
+Black Forest,chocolate,1kg,850
+Inserted successfully
+Id   Name           Flavor         Weight    Price
+1    Brownie        Truffle        1.5kg     850
+2    Black Forest   chocolate      1kg       850
+Menu
+1.Insert cake
+2.Update price
+3.Delete cake
+4.Exit
+2
+Enter the cake id
+2
+Enter the price
+1000
+Updated successfully
+Id   Name           Flavor         Weight    Price
+1    Brownie        Truffle        1.5kg     850
+2    Black Forest   chocolate      1kg       1000
+Menu
+1.Insert cake
+2.Update price
+3.Delete cake
+4.Exit
+3
+Enter the cake id
+1
+Deleted successfully
+Id   Name           Flavor         Weight    Price
+2    Black Forest   chocolate      1kg       1000
+Menu
+1.Insert cake
+2.Update price
+3.Delete cake
+4.Exit
+2
+Enter the cake id
+1
+Enter the price
+800
+Invalid cake id
+Menu
+1.Insert cake
+2.Update price
+3.Delete cake
+4.Exit
+3
+Enter the cake id
+1
+Invalid cake id
+Menu
+1.Insert cake
+2.Update price
+3.Delete cake
+4.Exit
+6
+Invalid input
+ 
