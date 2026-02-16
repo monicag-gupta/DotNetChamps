@@ -1,0 +1,54 @@
+using System;
+using System.Collections;
+
+class Emp
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public override string ToString()
+    {
+        return "\nID: " + Id + " Name: " + Name+ " ";
+    }
+    public Emp(int id, string name)
+    {
+        Id = id;
+        Name = name;
+    }
+    public Emp() { Id = 0;Name = ""; }
+}
+
+class Program
+{
+    public static void Main(string[] args)
+    {
+        Emp emp1 = new Emp(); //Constructor Obj Creation
+        emp1.Id = 109;
+        emp1.Name = "Johnny";
+        Emp emp2 = new Emp(108, "Zen"); //Constructor Obj Creation
+        Emp emp3 = new Emp { Id = 107, Name = "Lolo" }; //Initializer Obj Creation
+        List<Emp> emps = new List<Emp>();
+        emps.Add(new Emp { Id = 101, Name = "John" });
+        emps.Add(new Emp { Id = 102, Name = "Jane" });
+        emps.Add(new Emp { Id = 103, Name = "Bob" });
+        emps.Add(emp1); emps.Add(emp2); emps.Add(emp3);
+        foreach (Emp e in emps)  Console.Write(e);
+        foreach (Emp e in emps)
+        {
+            if (e.Name == "Jane")
+            {
+                Console.WriteLine("Found the Record as : " + e);
+            }
+        }
+        foreach (Emp e in emps)
+        {
+            if (e.Id==103)
+            {
+                Console.WriteLine("Found the Record as : " + e+"\nEnter Name:");
+                e.Name = Console.ReadLine();
+            }
+        }
+        Console.WriteLine("Post Updation:");
+        foreach (Emp e in emps) Console.Write(e);
+
+    }
+}
