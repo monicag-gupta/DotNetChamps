@@ -198,9 +198,72 @@ class Program
 
 
 
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Flower
+{
+    public string Name { get; set; }
+    public int Petals { get; set; }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Create list of flowers
+        List<Flower> flowers = new List<Flower>()
+        {
+            new Flower { Name = "Rose", Petals = 5 },
+            new Flower { Name = "Lily", Petals = 5 },
+            new Flower { Name = "Lotus", Petals = 4 },
+            new Flower { Name = "Dahlia", Petals = 8 },
+            new Flower { Name = "Tulip", Petals = 4 }
+        };
+
+        // Display complete list
+        Console.WriteLine("Complete Flower List:");
+        foreach (var flower in flowers)
+        {
+            Console.WriteLine($"Name: {flower.Name}, Petals: {flower.Petals}");
+        }
+
+        //Console.WriteLine("\nFiltered & Ordered List (Petals > 4):");
+
+        // LINQ Query
+        var result =
+            from f in flowers
+            //where f.Petals > 4
+            //orderby f.Name
+            //select f;
+            group f by f.Petals;
+
+        // Display filtered list
+        foreach (var flowerset in result)
+        {
+            Console.WriteLine("For the group with petals : " + flowerset.Key);
+            foreach(var flo in flowerset)
+                Console.WriteLine($"Name: {flo.Name}, Petals: {flo.Petals}");
+        }
+
+        Console.ReadLine();
+    }
+}
+
+
+
+
+
+
+
+
 WAP in C# using Linq to create a class Emp(ecode, ename, salary, designation., department). 
 Create a list of atleast 10 employees and then using Linq sort the employees according to salary.
-(no filteration/where clause required)
+(no filteration/where clause required) : 3 Emps from IT, 3 from HR, 4 from sales dept
+Create groups of Dept and display the emps in each group
 
 
 
