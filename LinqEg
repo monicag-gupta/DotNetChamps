@@ -199,7 +199,7 @@ class Program
 
 
 WAP in C# using Linq to create a class Emp(ecode, ename, salary, designation., department). 
-Create a list of employees and then using Linq sort the employees according to salary.
+Create a list of atleast 10 employees and then using Linq sort the employees according to salary.
 (no filteration/where clause required)
 
 
