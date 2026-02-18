@@ -140,3 +140,60 @@ class Program
 }
 
 
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Flower
+{
+    public string Name { get; set; }
+    public int Petals { get; set; }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Create list of flowers
+        List<Flower> flowers = new List<Flower>()
+        {
+            new Flower { Name = "Rose", Petals = 5 },
+            new Flower { Name = "Lily", Petals = 6 },
+            new Flower { Name = "Lotus", Petals = 4 },
+            new Flower { Name = "Dahlia", Petals = 8 },
+            new Flower { Name = "Tulip", Petals = 3 }
+        };
+
+        // Display complete list
+        Console.WriteLine("Complete Flower List:");
+        foreach (var flower in flowers)
+        {
+            Console.WriteLine($"Name: {flower.Name}, Petals: {flower.Petals}");
+        }
+
+        Console.WriteLine("\nFiltered & Ordered List (Petals > 4):");
+
+        // LINQ Query
+        var result =
+            from f in flowers
+            where f.Petals > 4
+            orderby f.Name
+            select f;
+
+        // Display filtered list
+        foreach (var flower in result)
+        {
+            Console.WriteLine($"Name: {flower.Name}, Petals: {flower.Petals}");
+        }
+
+        Console.ReadLine();
+    }
+}
+
+
+
+
