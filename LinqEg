@@ -304,6 +304,59 @@ class Program
 
 
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Flower
+{
+    public string Name { get; set; }
+    public int Petals { get; set; }
+}
+
+class Program
+{
+    static void Main()
+    {
+        List<Flower> flowers = new List<Flower>()
+        {
+            new Flower { Name = "Rose", Petals = 5 },
+            new Flower { Name = "Lily", Petals = 6 },
+            new Flower { Name = "Lotus", Petals = 4 },
+            new Flower { Name = "Dahlia", Petals = 8 },
+            new Flower { Name = "Tulip", Petals = 4 },
+            new Flower { Name = "Jasmine", Petals = 5 }
+        };
+
+        Console.WriteLine("Grouped By Petals:\n");
+
+        var groupedFlowers =
+            from f in flowers
+            group f by f.Petals into g
+            orderby g.Key
+            select g;
+
+        foreach (var group in groupedFlowers)
+        {
+            Console.WriteLine("Petals: " + group.Key);
+
+            foreach (var flower in group)
+            {
+                Console.WriteLine("   " + flower.Name);
+            }
+
+            Console.WriteLine();
+        }
+
+        Console.ReadLine();
+    }
+}
+
+
+
+
+
+
 
 
 
