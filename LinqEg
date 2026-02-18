@@ -87,3 +87,31 @@ class Program
     }
 }
 
+
+
+
+
+
+
+
+
+
+
+using System;
+using System.Linq;
+class Program
+{
+    static void Main(string[] args)
+    {
+        string[] flowers = { "dahlia", "rose", "lotus", "lily", "hibiscus", "daffodil" };
+        var fQuery =
+        from flower in flowers
+        where (flower.StartsWith("d"))
+        select flower;
+        foreach (string f in fQuery)
+        {
+            Console.WriteLine(f);
+        }        
+    }
+}
+
