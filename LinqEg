@@ -21,11 +21,20 @@ class Program
     }
 }
 
-
-
-
+Steps:
+1) Store the string in a var : x
+3) query y for each char if == ','  select them put result in qm
+4) foreach q qm  keep a count of q
+5) print count
 
 Count Lorem present in the following text. And print all the Lorem.
+Steps:
+1) Store the lines in a var : x
+2) find string[] y which is split of x for " "  : var y=x.split(' ');
+3) query y for each str if equals("lorem") select them put result in qm
+4) foreach q qm print q and keep a count of q
+5) print count
+
 
 
 What is Lorem Ipsum?
