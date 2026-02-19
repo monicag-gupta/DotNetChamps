@@ -370,3 +370,42 @@ Create groups of Dept and display the emps in each group
 
 
 
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+interface IndraVerma
+{
+    void chotaBheem(); //SAM: Single Abstract Method
+}
+class Kirmada : IndraVerma
+{
+    public void chotaBheem()
+    {
+        Console.WriteLine("Kalaripayetu");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        IndraVerma indra = new Kirmada();
+        indra.chotaBheem();
+
+        
+    }
+}
+
+
+
+
+
+
+
+
