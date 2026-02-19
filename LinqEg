@@ -477,3 +477,41 @@ class Program
 
 
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+
+delegate void IndraVerma();  //Class called Indraverma1 with no param SAM returning void
+class Program
+{
+    delegate int op(int x, int y);
+    static int operation(int x, int y, op o) 
+    {
+        return o(x, y);
+    }
+
+
+    static void Main()
+    {
+        IndraVerma indra = () => Console.WriteLine("Kalaripayetu");
+        indra();
+        //op o = (x, y) => x + y;
+        int res = operation(9, 6, (x, y) => x + y);
+        Console.WriteLine(res);
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
