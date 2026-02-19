@@ -507,6 +507,43 @@ class Program
 
 
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+class Program
+{
+    delegate int op(int x, int y);
+    static int operation(int x, int y, op o) 
+    {
+        return o(x, y);
+    }
+
+
+    static void Main()
+    {
+        Console.WriteLine("Enter a number:");
+        int x=Convert.ToInt32(Console.ReadLine());
+        Console.WriteLine("Enter another number:");
+        int y=Convert.ToInt32(Console.ReadLine());
+        op o = (x, y) => x + y;
+        Console.WriteLine("Which Operation is required:");
+        Console.WriteLine("\n1.Add\n2.Sub\n3.Mul\n4.Div\nEnter Choice:");
+        int oper= Convert.ToInt32(Console.ReadLine());
+        if (oper == 1) o = (x, y) => x + y;
+        else if (oper == 2) o = (x, y) => x - y;
+        else if (oper == 3) o = (x, y) => x * y;
+        else if (oper == 4) o = (x, y) => y == 0 ? 0 : x / y;
+        else Console.WriteLine("Invalid Choice, taking the default Add function.");
+        int res = operation(x, y, o);
+        Console.WriteLine("The Result is {0}.", res);
+
+
+    }
+
+    }
+
+
 
 
 
