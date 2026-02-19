@@ -407,5 +407,73 @@ class Program
 
 
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+interface IndraVerma
+{
+    void chotaBheem(); //SAM: Single Abstract Method
+}
+
+delegate void IndraVerma1();  //Class called Indraverma1 with no param SAM returning void
+
+class Kirmada : IndraVerma
+{
+    public void chotaBheem()
+    {
+        Console.WriteLine("Kalaripayetu");
+    }
+}
+
+class Kirmada2
+{
+    public void chotaBheem()
+    {
+        Console.WriteLine("Kalaripayetu");
+    }
+
+}
+class Calc
+{
+    public static int add(int x, int y)
+    {
+        return x + y;
+    }
+    public static int sub(int x, int y)
+    {
+        return x - y;
+    }
+    public static int mul(int x, int y)
+    {
+        return x + y;
+    }
+}
+
+class Program
+{
+    delegate int op(int x, int y);
+    static int operation(int x, int y, op o) 
+    {
+        return o(x, y);
+    }
+
+
+    static void Main()
+    {
+        IndraVerma indra = new Kirmada();
+        indra.chotaBheem();
+        Kirmada2 kirmada2 = new Kirmada2();
+        IndraVerma1 indra2 = new IndraVerma1(kirmada2.chotaBheem);
+        indra2();
+        int res = operation(9,6, new op(Calc.add) );
+        Console.WriteLine(res);
+    }
+}
+
+
+
+
+
 
 
