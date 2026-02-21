@@ -1,0 +1,97 @@
+using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Models;
+
+namespace WebApplication1.Controllers
+{
+    public class UserController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Success()
+        {
+            ViewData["msg2"] = "Welcome To my Site";
+            if (TempData["uname"] == null)
+            {
+                ViewData["msg2"] = "Login Username not Found";
+            }
+
+            return View();
+        }
+
+
+        //public IActionResult ShowUser(string uname, string pass)
+        //{
+        //    //ViewBag.uname=uname;
+        //    //ViewBag.pass=pass;            
+        //    User user=new User { uname=uname, pass=pass};
+        //    ViewBag.userInfo = user;
+        //    if (user.authenticate())
+        //        ViewBag.msg = "You are Authenticated";
+        //    else
+        //        ViewBag.msg = "You are Not Authenticated";
+
+        //    return View();
+
+        //}
+
+
+
+        //public IActionResult ShowUser(string uname, string pass)
+        //{
+        //    ViewData["uname"] = uname;
+        //    ViewData["pass"] =pass;            
+        //    User user = new User { uname = uname, pass = pass };
+        //    //ViewData["userInfo"] = user;
+        //    if (user.authenticate())
+        //        ViewData["msg"] = "You are Authenticated";
+        //    else
+        //        ViewData["msg"] = "You are Not Authenticated";
+
+        //    return View();
+
+        //}
+
+
+        //public IActionResult ShowUser(string uname, string pass)
+        //{
+        //    TempData["uname"] = uname;
+        //    TempData["pass"] = pass;
+        //    User user = new User { uname = uname, pass = pass };
+        //    //ViewData["userInfo"] = user;
+        //    if (user.authenticate())
+        //        TempData["msg"] = "You are Authenticated";
+        //    else
+        //        TempData["msg"] = "You are Not Authenticated";
+
+        //    return View();
+
+        //}
+
+
+        public IActionResult ShowUser(string uname, string pass)
+        {
+            ViewData["uname"] = uname;
+            TempData["pass"] = pass;
+            User user = new User { uname = uname, pass = pass };
+            //ViewData["userInfo"] = user;
+            if (user.authenticate())
+                ViewBag.msg = "You are Authenticated";
+            else
+                ViewBag.msg = "You are Not Authenticated";
+
+            return View();
+
+        }
+    }
+}
+
+
+
+
+
+
+
+
