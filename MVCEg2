@@ -1,0 +1,116 @@
+using Microsoft.AspNetCore.Mvc;
+using WebApplication1.Models;
+
+namespace WebApplication1.Controllers
+{
+    public class UserController : Controller
+    {
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public IActionResult Success()
+        {
+            ViewData["msg2"] = "Welcome To my Site";
+            ViewData["msg3"] = "";
+            if (TempData["uname"] == null)
+            {
+                ViewData["msg2"] = "Login Username not Found";
+            }
+            if (ViewData["pass"] == null)
+            {
+                ViewData["msg3"] = "Password could not be passed to the second request";
+            }
+
+            return View();
+        }
+
+        public IActionResult ShowUser(string uname, string pass)
+        {
+            TempData["uname"] = uname;
+            ViewData["pass"] = pass;
+            User user = new User { uname = uname, pass = pass };
+            //ViewData["userInfo"] = user;
+            if (user.authenticate())
+            {
+                ViewBag.msg = "You are Authenticated";
+                return RedirectToAction("Success");
+            }
+            else
+                ViewBag.msg = "You are Not Authenticated";
+
+            return View();
+
+        }
+    }
+}
+
+
+
+
+
+
+User->Index.cshtml
+
+<h1> User View from User Controller</h1>
+
+<form action="/User/ShowUser">
+    UserName:<input type="text" name="uname"/><br/>
+    password:<input type="text" name="pass"/><br/>
+    <input type="submit"/>
+ </form>
+
+
+
+
+
+
+
+User->ShowUser.cshtml
+
+<h1>@ViewBag.msg</h1>
+<h2>Your Information is:</h2>
+<h3>@ViewData["uname"]</h3>
+<h3>@TempData["pass"]</h3>
+
+
+
+
+
+User->Success
+
+<h1>@ViewData["msg2"]</h1>
+<h2>@TempData["uname"]</h2>
+<h3>@ViewData["msg3"]</h3>
+
+
+
+
+User.cs (Model)
+
+namespace WebApplication1.Models
+{
+    public class User
+    {
+        public string uname { get; set; }
+        public string pass { get; set; }
+
+        public bool authenticate()
+        {
+            if(uname.Equals("John") && pass.Equals("Doe"))
+                return true;
+            return false;
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
