@@ -1,0 +1,214 @@
+Models->
+
+
+
+Empl.cs
+
+namespace WebApplication3.Models
+{
+    public class Empl
+    {
+        public int ecode {  get; set; }
+        public string ename {  get; set; }
+        public int esal {  get; set; }
+    }
+}
+
+
+
+
+EmpList.cs
+
+using System.Collections.Generic;
+
+namespace WebApplication3.Models
+{
+    public class EmpList
+    {
+        public List<Empl> emps = new List<Empl>();
+        public EmpList()
+        {
+            emps.Add(new Empl { ecode = 101, ename = "John", esal = 500 });
+            emps.Add(new Empl { ecode = 102, ename = "Jane", esal = 200 });
+            emps.Add(new Empl { ecode = 103, ename = "Bob", esal = 700 });
+        }
+        public void insert(Empl empl)
+        {
+            emps.Add(empl);
+        }
+        public void insert(int code, string name, int sal)
+        {
+            emps.Add(new Empl { ecode=code, ename=name, esal=sal });
+        }
+        public string read()
+        {
+            string emplist = "";
+            foreach (Empl empl in emps)
+            {
+                emplist += "\nName:" + empl.ename + " with code:"
+                    + empl.ecode + " is earning : " + empl.esal;
+            }
+            return emplist;
+        }
+        public bool update(Empl empl)
+        {
+            foreach (Empl e in emps)
+            {
+                if (e.ecode == empl.ecode)
+                {
+                    e.ename = empl.ename;
+                    e.esal = empl.esal;
+                    return true;
+                }
+            }
+            return false;
+        }
+        public bool delete(int code)
+        {
+            foreach (Empl e in emps)
+            {
+                if (e.ecode == code)
+                {
+                    emps.Remove(e);
+                    return true;
+                }
+            }
+            return false;
+
+        }
+    }
+}
+
+
+
+
+
+
+
+Controllers->
+
+
+
+EmpController.cs
+
+using Microsoft.AspNetCore.Mvc;
+using WebApplication3.Models;
+
+namespace WebApplication3.Controllers
+{
+    public class EmpController : Controller
+    {
+        static EmpList empList=new EmpList();
+        public IActionResult Index()
+        {
+            ViewData["emps"] = empList.read();
+            return View();
+        }
+        public IActionResult Insert()
+        {
+            return View();
+        }
+        public IActionResult Inserted()
+        {
+            int ecode = System.Convert.ToInt32(Request.Form["ecode"]);
+            string ename = Request.Form["ename"];
+            int esal = System.Convert.ToInt32(Request.Form["esal"]);
+            empList.insert(ecode, ename, esal);
+            ViewData["emps"] = empList.read();
+            return View("Index");
+        }
+        public IActionResult updated(int ecode, string ename, int esal)
+        {
+            empList.update(new Empl { ecode=ecode,ename=ename,esal=esal});
+            ViewData["emps"] = empList.read();
+            return View("Index");
+        }
+        public IActionResult deleted()
+        {
+            int ecode= System.Convert.ToInt32(Request.Query["ecode"]);
+            empList.delete(ecode);
+            ViewData["emps"] = empList.read();
+            return View("Index");
+        }
+        public IActionResult Update()
+        {
+            return View();
+        }
+        public IActionResult Delete()
+        {
+            return View();
+        }
+    }
+}
+
+
+
+
+
+Views->Emp->
+
+
+Index.cshtml
+
+
+<h1> This is Emp Controller</h1>
+
+<h2>The Employees are:</h2>
+<h3>@ViewData["emps"]</h3>
+<h4><a href="/Emp/Insert">Add Employee</a></h4>
+<h4><a href="/Emp/Update">Update Employee</a></h4>
+<h4><a href="/Emp/Delete">Delete Employee</a></h4>
+
+
+
+
+
+
+
+Insert.cshtml
+
+
+<form action="/Emp/Inserted" method="post">
+    Employee code: <input type="text" name="ecode"/><br/>
+    Employee name: <input type="text" name="ename"/><br/>
+    Employee sal: <input type="text" name="esal"/><br/>
+    <input type="submit" value="Add Employee"/>
+</form>
+
+
+
+
+
+
+
+Update.cshtml
+
+
+<form action="/Emp/Updated">
+    Existing Employee code: <input type="text" name="ecode"/><br/>
+    New Employee name: <input type="text" name="ename"/><br/>
+    New Employee sal: <input type="text" name="esal"/><br/>
+    <input type="submit" value="Update Employee"/>
+</form>
+
+
+
+
+
+
+
+Delete.cshtml
+
+
+<form action="/Emp/Deleted">
+    Existing Employee code (Record for Deletion): 
+    <input type="text" name="ecode"/><br/>
+    <input type="submit" value="Delete Employee"/>
+</form>
+
+
+
+
+
+
+
