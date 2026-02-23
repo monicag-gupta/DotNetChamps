@@ -1,0 +1,113 @@
+using System;
+using System.Collections.Generic;
+
+namespace ConsoleApp2
+{
+    class Empl
+    {
+        private int _esal;
+        public int ecode {  get; set; }
+        public string ename {  get; set; }
+        public int esal
+        {
+            get
+            {
+                return _esal;
+            }
+            set
+            {
+                if (value < 0)
+                {
+                    _esal = 0;
+                }
+                else
+                    _esal = value;
+            }
+        }
+        public override string ToString()
+        {
+            return "\nEname : " + ename + " earns : " + esal + "and has code " + ecode;
+        }
+    }
+    class EmplBO
+    {
+        public List<Empl>  emps= new List<Empl>();
+        public EmplBO()
+        {
+            emps.Add(new Empl { ecode = 101, ename = "John", esal = 500 });
+            emps.Add(new Empl { ecode = 102, ename = "Jane", esal = 700 });
+            emps.Add(new Empl { ecode = 103, ename = "Bob", esal = 400 });
+
+        }
+        public void insert(Empl empl)
+        {
+            emps.Add(empl);
+        }
+        public void update(Empl empl)
+        {
+            //update empl set ename="new name", esal=new sal where ecode=code
+            foreach(Empl e in emps)
+            {
+                if(e.ecode == empl.ecode)
+                {
+                    e.esal = empl.esal;
+                    e.ename = empl.ename;
+                }
+            }
+        }
+        public void delete(int ecode)
+        {
+            //delete from empl where ecode = code;
+            foreach(Empl e in emps)
+            {
+                if(e.ecode == ecode)
+                {
+                    emps.Remove(e);
+                    return;
+                }
+            }
+        }
+        public void read()
+        {
+            foreach (Empl e in emps)
+            {
+                Console.Write(e);
+            }
+
+        }   
+
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Empl e=new Empl();
+            e.esal = -100;
+            Console.WriteLine(e.esal);
+            e.ecode = -100;
+            Console.WriteLine(e.ecode);
+
+
+
+            Empl empl = new Empl();
+            EmplBO dao = new EmplBO();
+            Console.WriteLine("From Database");
+            dao.read();
+            
+            Console.WriteLine("\nLets Insert Now : Empl(104,'Smith',700)");
+            Empl newe = new Empl { ecode = 104, ename = "Smith", esal = 700 };
+            dao.insert(newe);
+            dao.read();
+
+            Console.WriteLine("\nLets Update Now : Empl(104,'Smithy',900)");
+            newe = new Empl { ecode = 104, ename = "Smithy", esal = 900 };
+            dao.update(newe);
+            dao.read();
+
+            Console.WriteLine("\nLets delete Now : 104");
+            dao.delete(104);
+            dao.read();
+
+        }
+    }
+}
