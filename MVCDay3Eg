@@ -1,0 +1,57 @@
+@{
+    ViewBag.Title = "Non-Strongly Typed HTML Helpers";
+}
+
+<h2>Non-Strongly Typed HTML Helpers Example</h2>
+
+<hr />
+
+<!-- TextBox -->
+<h4>TextBox</h4>
+@Html.TextBox("Textbox1", "val")
+
+<br /><br />
+
+<!-- TextArea -->
+<h4>TextArea</h4>
+@Html.TextArea("Textarea1", "val", 5, 15, null)
+
+<br /><br />
+
+<!-- Password -->
+<h4>Password</h4>
+@Html.Password("Password1", "val")
+
+<br /><br />
+
+<!-- Hidden Field -->
+<h4>Hidden Field</h4>
+@Html.Hidden("Hidden1", "val")
+
+<br /><br />
+
+<!-- CheckBox -->
+<h4>CheckBox</h4>
+@Html.CheckBox("Checkbox1", false)
+
+<br /><br />
+
+<!-- RadioButton -->
+<h4>RadioButton</h4>
+@Html.RadioButton("Radiobutton1", "val", true)
+
+<br /><br />
+
+<!-- DropDownList -->
+<h4>DropDown List</h4>
+@Html.DropDownList("DropDownList1",
+    new SelectList(new[] { "Male", "Female" }))
+
+<br /><br />
+
+<!-- Multiple Select List -->
+<h4>Multiple Select (ListBox)</h4>
+@Html.ListBox("ListBox1",
+    new MultiSelectList(new[] { "Cricket", "Chess" }))
+
+<br /><br />
