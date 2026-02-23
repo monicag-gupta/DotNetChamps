@@ -55,3 +55,148 @@
     new MultiSelectList(new[] { "Cricket", "Chess" }))
 
 <br /><br />
+
+
+
+
+
+
+
+
+
+
+
+
+<form action="DisplayData">
+    Code: <input type="text" name="code"><br>
+    Name: <input type="text" name="name"><br>
+    Salary: <input type="text" name="sal"><br>
+    <input type="submit"/>
+</form>
+
+<hr>
+<form action="DisplayDataPost" method="post">
+    Code: <input type="text" name="code"><br>
+    Name: <input type="text" name="name"><br>
+    Salary: <input type="text" name="sal"><br>
+    <input type="submit"/>
+</form>
+
+<hr>
+<form action="DisplayDataPostGet" method="post">
+    Code: <input type="text" name="code"><br>
+    Name: <input type="text" name="name"><br>
+    Salary: <input type="text" name="sal"><br>
+    <input type="submit"/>
+</form>
+
+
+<hr>
+<form action="DisplayDataEmpl" method="post">
+    Code: <input type="text" name="ecode"><br>
+    Name: <input type="text" name="ename"><br>
+    Salary: <input type="text" name="esal"><br>
+    <input type="submit"/>
+</form>
+
+
+
+
+
+
+
+
+using Microsoft.AspNetCore.Mvc;
+using WebApplication4.Models;
+
+namespace WebApplication4.Controllers
+{
+    public class EmpController : Controller
+    {
+        public IActionResult Index()
+        {
+            Empl empl = new Empl{ecode=101,ename="John Doe",esal=500 };
+
+            return View("Index",empl);
+        }
+        public IActionResult Display()
+        {           
+            return View();
+        }
+        public IActionResult DisplayData()
+        {
+            Empl empl = new Empl();
+            empl.ename = Request.Query["name"];
+            empl.ecode = System.Convert.ToInt32(Request.Query["code"]);
+            empl.esal = System.Convert.ToInt32(Request.Query["sal"]);
+
+            return View("Index", empl);
+
+        }
+
+        public IActionResult DisplayDataPost()
+        {
+            Empl empl = new Empl();
+            empl.ename = Request.Form["name"];
+            empl.ecode = System.Convert.ToInt32(Request.Form["code"]);
+            empl.esal = System.Convert.ToInt32(Request.Form["sal"]);
+
+            return View("Index", empl);
+
+        }
+        public IActionResult DisplayDataPostGet(int code, string name, int sal)
+        {
+            Empl empl = new Empl();
+            empl.ename = name;
+            empl.ecode = code;
+            empl.esal = sal;
+
+            return View("Index", empl);
+
+        }
+        public IActionResult DisplayDataEmpl(Empl empl)
+        {
+            return View("Index", empl);
+
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+@model WebApplication4.Models.Empl
+
+<ul>
+    <li>Name : @Model.ename </li>
+    <li>Code : @Model.ecode </li>
+    <li>Salary : @Model.esal </li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+namespace WebApplication4.Models
+{
+    public class Empl
+    {
+        public int ecode {  get; set; }
+        public string ename { get; set; }
+        public int esal {  get; set; }
+
+    }
+}
+
