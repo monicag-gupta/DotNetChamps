@@ -1,0 +1,138 @@
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form method="post">
+    Name: <input type="text" name="nam"/>
+    <br/>
+    <input type="submit">
+</form>
+<div>
+    @{
+        if(ViewData["nam"] != null){
+            <h2>@ViewData["nam"]</h2>
+        }
+    }
+</div>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<div>
+    @{
+        int[] ar={10,2,3,5,8,4,9,1};
+        foreach(int x in ar){
+            <span>@x, </span>
+        }
+     }
+</div>
+
+
+
+
+<div>
+    @{
+        var price = 45;
+
+        if (price > 30)
+        {
+            <h3>Price is Higher than 30.</h3>
+        }
+        else if (price == 30)
+        {
+            <h3>Price is Equal to 30.</h3>
+        }
+        else
+        {
+            <h3>Price is Lower than 30.</h3>
+        }
+    }
+</div>
+
+
+@{
+    int i=10;
+    int j=20;
+    int result=i+j;
+}
+
+<h2>@i + @j = @result</h2>
+
+<h3><i>Today's date is:<br/>
+    @DateTime.Now.ToShortDateString()
+</i></h3>
+
+<div>
+    Date: @DateTime.Now.Date.ToString("dd-MM-yyyy")
+    <br />
+
+    Hour: @DateTime.Now.Hour
+    <br />
+
+    Minute: @DateTime.Now.Minute
+    <br />
+
+    Second: @DateTime.Now.Second
+</div>
+
+
+
+
+
+
+
+
+
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
+using WebApplication7.Models;
+
+namespace WebApplication7.Controllers
+{
+    public class HomeController : Controller
+    {
+        private readonly ILogger<HomeController> _logger;
+
+        public HomeController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Index(string nam)
+        {
+            if (nam != null)
+            {
+                ViewData["nam"] = nam;
+            }
+            return View();
+        }
+
+
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+    }
+}
+
+
+
+
+
