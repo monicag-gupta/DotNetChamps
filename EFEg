@@ -1,0 +1,12 @@
+CREATE DATABASE EmpDB;
+
+USE EmpDB;
+
+CREATE TABLE Empl
+(
+    ecode INT PRIMARY KEY,
+    ename VARCHAR(50),
+    esal INT
+);
+
+
