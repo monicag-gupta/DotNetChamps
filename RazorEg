@@ -140,22 +140,297 @@ namespace WebApplication7.Controllers
 
 
 
-public class Student
+
+
+
+
+
+
+
+Data Annotation:
+
+Models ->
+
+Student.cs
+
+using System.ComponentModel.DataAnnotations;
+namespace WebApplication7.Models
 {
-    [Required(ErrorMessage = "Name is required")]
-    [StringLength(50)]
-    public string Name { get; set; }
+    public class Student
+    {
+        [Required(ErrorMessage = "Name is required")]
+        [StringLength(50)]
+        public string Name { get; set; }
 
-    [Range(18, 60, ErrorMessage = "Age must be between 18 and 60")]
-    public int Age { get; set; }
+        [Range(18, 60, ErrorMessage = "Age must be between 18 and 60")]
+        public int Age { get; set; }
 
-    [EmailAddress(ErrorMessage = "Invalid Email")]
-    public string Email { get; set; }
+        [EmailAddress(ErrorMessage = "Invalid Email")]
+        public string Email { get; set; }
 
-    [Display(Name = "Mobile Number")]
-    [Phone]
-    public string Mobile { get; set; }
+        [Display(Name = "Mobile Number")]
+        [Phone]
+        public string Mobile { get; set; }
+    }
+
 }
+
+
+
+
+
+Registration.cs
+
+
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
+
+namespace WebApplication7.Models
+{
+    public class Registration
+    {
+        // Name
+        [Required(ErrorMessage = "Name is Required")]
+        [DisplayName("Enter Your Name:")]
+        [StringLength(50, MinimumLength = 3,
+            ErrorMessage = "Name must be between 3 and 50 characters")]
+        [MaxLength(50)]
+        public string Name { get; set; }
+
+        // Age
+        [Required(ErrorMessage = "Age is Required")]
+        [Range(1, 120,
+            ErrorMessage = "Age must be between 1-120 in years.")]
+        public int Age { get; set; }
+
+        // Address
+        [Required(ErrorMessage = "Address is Required")]
+        [StringLength(100, MinimumLength = 5)]
+        public string Address { get; set; }
+
+        // Email
+        [Required(ErrorMessage = "Email ID is Required")]
+        [DataType(DataType.EmailAddress)]
+        [MaxLength(50)]
+        [RegularExpression(@"[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}",
+            ErrorMessage = "Incorrect Email Format")]
+        public string Email { get; set; }
+
+        // Confirm Email
+        [Required(ErrorMessage = "Confirm Email is Required")]
+        [System.ComponentModel.DataAnnotations.Compare("Email",
+            ErrorMessage = "Email Not Matched")]
+        public string ConfirmEmail { get; set; }
+
+        // Phone Number (Output format: 91-1234-567-890)
+        [Required(ErrorMessage = "Phone Number is Required")]
+        [RegularExpression(@"^\d{2}-\d{4}-\d{3}-\d{3}$",
+            ErrorMessage = "Phone format must be 91-1234-567-890")]
+        public string Phone { get; set; }
+    }
+}
+
+
+
+
+
+
+Controllers->
+
+
+StudentController.cs
+
+using Microsoft.AspNetCore.Mvc;
+using WebApplication7.Models;
+
+namespace WebApplication7.Controllers
+{
+    public class StudentController : Controller
+    {
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Create(Student s)
+        {
+            if (ModelState.IsValid)
+            {
+                return Content("Form Submitted Successfully");
+            }
+            return View(s);
+        }
+
+    }
+}
+
+
+
+
+
+
+
+RegistrationController.cs
+
+using Microsoft.AspNetCore.Mvc;
+using WebApplication7.Models;
+
+namespace WebApplication7.Controllers
+{
+    public class RegistrationController : Controller
+    {
+        // GET
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // POST
+        [HttpPost]
+        public ActionResult Create(Registration model)
+        {
+            if (ModelState.IsValid)
+            {
+                return Content("Thank You for Registration "
+                    + model.Name + ", "
+                    + model.Email + ", "
+                    + model.Phone);
+            }
+
+            return View(model);
+        }
+    }
+
+}
+
+
+
+
+
+
+
+
+Views ->
+
+
+Student -> Create.cshtml
+
+@model WebApplication7.Models.Student
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name)
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Age)
+        @Html.TextBoxFor(m => m.Age)
+        @Html.ValidationMessageFor(m => m.Age)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email)
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+
+    <div>
+        @Html.LabelFor(m => m.Mobile)
+        @Html.TextBoxFor(m => m.Mobile)
+        @Html.ValidationMessageFor(m => m.Mobile)
+    </div>
+
+    <input type="submit" value="Submit" />
+}
+
+
+
+
+
+
+
+
+Registration -> Create.cshtml
+
+
+@model WebApplication7.Models.Registration
+
+@{
+    ViewBag.Title = "Registration Form";
+}
+
+<h2>Registration Form</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name)
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+
+    <br />
+
+    <div>
+        @Html.LabelFor(m => m.Age)
+        @Html.TextBoxFor(m => m.Age)
+        @Html.ValidationMessageFor(m => m.Age)
+    </div>
+
+    <br />
+
+    <div>
+        @Html.LabelFor(m => m.Address)
+        @Html.TextBoxFor(m => m.Address)
+        @Html.ValidationMessageFor(m => m.Address)
+    </div>
+
+    <br />
+
+    <div>
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email)
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+
+    <br />
+
+    <div>
+        @Html.LabelFor(m => m.ConfirmEmail)
+        @Html.TextBoxFor(m => m.ConfirmEmail)
+        @Html.ValidationMessageFor(m => m.ConfirmEmail)
+    </div>
+
+    <br />
+
+    <div>
+        @Html.LabelFor(m => m.Phone)
+        @Html.TextBoxFor(m => m.Phone)
+        <small>Format: 91-1234-567-890</small>
+        @Html.ValidationMessageFor(m => m.Phone)
+    </div>
+
+    <br />
+
+    <input type="submit" value="Register" />
+}
+
+
+
+
+
+Run the Project
+Enter Incorrect Values, then correct values to see the result.
+
+
+
+
+
+
 
 
 
