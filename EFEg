@@ -9,4 +9,219 @@ CREATE TABLE Empl
     esal INT
 );
 
+Select * from Empl;
+
+
+
+
+In Visual Studio:
+
+Create a new project with template: ASP.Net Project (.Net framework) -> in 4.7 framework -> MVC -> No HTTPs
+
+Right click Models -> Add new item-> from template -> ADO.NET Entity Data Model
+Name it:
+EmpModel.edmx
+Click Add.
+
+Choose Database First
+Select:
+EF Designer from Database
+Click Next
+
+Create Connection
+Click New Connection
+Choose:
+Server name
+Database: EmpDB
+	Click OK
+	Click Next
+
+
+Select Table
+Select Empl table
+Click Finish
+
+
+
+
+What Gets Created Automatically
+Inside Models:
+EmpModel.edmx
+EmpModel.Context.cs
+Empl.cs
+You now have:
+•	Entity class → Empl
+•	DbContext → EmpDBEntities
+No manual EF installation required because EDMX already uses it internally.
+
+
+
+
+Create EmpController (Empty Controller)
+
+using System;
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
+using WebApplication5.Models;
+using System.Data.Entity;
+
+namespace WebApplication5.Controllers
+{
+    public class EmpController : Controller
+    {
+        private EmpDBEntities db = new EmpDBEntities();
+
+        // READ ALL
+        public ActionResult Index()
+        {
+            return View(db.Empls.ToList());
+        }
+
+        // READ SINGLE
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            Empl emp = db.Empls.Find(id);
+
+            if (emp == null)
+                return HttpNotFound();
+
+            return View(emp);
+        }
+
+        // CREATE GET
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // CREATE POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Empl emp)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Empls.Add(emp);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(emp);
+        }
+
+        // EDIT GET
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            Empl emp = db.Empls.Find(id);
+
+            if (emp == null)
+                return HttpNotFound();
+
+            return View(emp);
+        }
+
+        // EDIT POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Empl emp)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(emp).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(emp);
+        }
+
+        // DELETE GET
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            Empl emp = db.Empls.Find(id);
+
+            if (emp == null)
+                return HttpNotFound();
+
+            return View(emp);
+        }
+
+        // DELETE POST
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Empl emp = db.Empls.Find(id);
+            db.Empls.Remove(emp);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+    }
+}
+
+
+
+
+Build the Solution
+
+
+Create Scaffolded Views ONLY
+Now we generate views based on the model.
+Right click → Views folder
+Add → View
+Create each view manually using template:
+
+Create Index View
+•	View Name → Index
+•	Template → List
+•	Model class → Empl
+•	Data context → EmpDBEntities
+Click Add
+
+Create Details View
+•	Template → Details
+•	Model class → Empl
+
+Create Create View
+•	Template → Create
+•	Model class → Empl
+
+Create Edit View
+•	Template → Edit
+•	Model class → Empl
+
+Create Delete View
+•	Template → Delete
+•	Model class → Empl
+
+Visual Studio creates:
+Views
+   Emp
+      Index.cshtml
+      Create.cshtml
+      Edit.cshtml
+      Delete.cshtml
+      Details.cshtml
+
+
+
+Run Application
+
+Go to:
+/Emp
+Full CRUD working
+
+
+
+
+
+
 
