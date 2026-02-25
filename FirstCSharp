@@ -145,6 +145,110 @@ print(): print all attributes + total amount
 
 
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FirstConsoleProject
+{
+    public class First
+    {
+        static void Main(string[] args)
+        {
+            Emp e1 = new Emp();
+            e1.Ecode = 1;
+            Console.WriteLine(e1.Ecode);
+            e1.Ecode = 103;
+            Console.WriteLine(e1.Ecode);
+            e1.Name = null;
+            Console.WriteLine(e1.Name);
+            e1.Name = "John";
+            Console.WriteLine(e1.Name);
+            e1.Sal = 1000;
+            Console.WriteLine(e1.Sal);
+            
+
+
+        }
+    }
+}
+
+
+
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FirstConsoleProject
+{
+    public class Emp
+    {
+        private int _ecode;
+        private string _name;
+        private int _sal;
+
+        public int Ecode
+        {
+            get
+            {
+                int ecode = _ecode % 100;
+                return ecode; 
+            }
+            set
+            {
+                if (value < 100)
+                    _ecode = 0;
+                else
+                    _ecode = value;
+            }
+        }
+        public string Name
+        {
+            get { return  _name; }
+            set {  _name = value; }
+        }
+        public int Sal { 
+            get { return _sal; }
+            set { _sal = value; } 
+        }
+        //public void input()
+        //{
+        //    Console.WriteLine("Enter your ID:");
+        //    _ecode = Convert.ToInt32(Console.ReadLine());
+        //    Console.WriteLine("Enter your Name:");
+        //    _name = Console.ReadLine();
+        //    Console.WriteLine("Enter your Salary:");
+        //    _sal = Convert.ToInt32(Console.ReadLine());
+
+        //}
+        //public int grossSal(int salary)
+        //{
+        //    int total=salary + (int)(.20 * salary);
+        //    return total;
+        //}
+        //public void display()
+        //{
+        //    Console.WriteLine("Emp code : " + _ecode + " Name : " + _name);
+        //    int finalSal = grossSal(_sal);
+        //    Console.WriteLine("Basic Salary: " + _sal + " Gross Sal : " + finalSal);
+
+        //}
+
+    }
+}
+
+
+
+
 
 
 
