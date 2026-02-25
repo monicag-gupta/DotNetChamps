@@ -83,3 +83,44 @@ with address as <address>
 
 
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FirstConsoleProject
+{
+    public class Emp
+    {
+        private int _ecode;
+        private string _name;
+        private int _sal;
+        public void input()
+        {
+            Console.WriteLine("Enter your ID:");
+            _ecode = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter your Name:");
+            _name = Console.ReadLine();
+            Console.WriteLine("Enter your Salary:");
+            _sal = Convert.ToInt32(Console.ReadLine());
+
+        }
+        public int grossSal(int salary)
+        {
+            int total=salary + (int)(.20 * salary);
+            return total;
+        }
+        public void display()
+        {
+            Console.WriteLine("Emp code : " + _ecode + " Name : " + _name);
+            int finalSal = grossSal(_sal);
+            Console.WriteLine("Basic Salary: " + _sal + " Gross Sal : " + finalSal);
+
+        }
+
+    }
+}
+
+
+
