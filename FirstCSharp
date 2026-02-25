@@ -124,3 +124,27 @@ namespace FirstConsoleProject
 
 
 
+
+
+Design a class called RailwayTicket ->
+
+string _pnrNo
+string _fromStation
+string _toStation
+int _totalSeats
+int _tktAmnt
+
+CalculateTotal() -> returns _totalSeats * _tktAmnt
+input()
+print(): print all attributes + total amount
+
+
+
+
+
+
+
+
+
+
+
