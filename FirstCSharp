@@ -1,0 +1,85 @@
+First Proj
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FirstConsoleProject
+{
+    public class First
+    {
+        static void Main(string[] args)
+        {
+            Emp e1 = new Emp();
+            e1.input();
+            e1.display();
+           
+
+        }
+    }
+}
+
+
+
+
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace FirstConsoleProject
+{
+    public class Emp
+    {
+        private int _ecode;
+        private string _name;
+        public void input()
+        {
+            Console.WriteLine("Enter your ID:");
+            _ecode = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter your Name:");
+            _name = Console.ReadLine();
+
+        }
+        public void display()
+        {
+            Console.WriteLine("Emp code : " + _ecode + " Name : " + _name);
+
+        }
+
+    }
+}
+
+
+
+
+
+
+
+Design a class called Student ->
+
+stdID
+regNo
+YearOfEnrollment
+course
+fees
+stdName
+address
+
+takeInput() -> Take input from user all the values of attributes
+print() -> prints the details in pattern:
+
+<stdID> with <regNo> has paid <fees>
+<stdName> is enrolled in <course> since year <YearOfEnrollment>
+with address as <address>
+
+
+
+
+
+
