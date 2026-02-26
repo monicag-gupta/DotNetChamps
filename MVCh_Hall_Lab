@@ -1,0 +1,101 @@
+Models-> Hall.cs
+
+namespace WebApplication8.Models
+{
+    public class Hall
+    {
+        public string Name {  get; set; }
+        public string Location { get; set; }
+    }
+}
+
+
+
+
+Models-> HAllBO.cs:
+
+
+using System.Collections.Generic;
+using System.Linq;
+
+namespace WebApplication8.Models
+{
+    public class HallBO
+    {
+        List<Hall> halls = new List<Hall>();
+        public HallBO()
+        {
+            halls.Add(new Hall { Name = "The Walt Disney Concert Hall", Location = "London" });
+            halls.Add(new Hall { Name = "AAA", Location = "Norway" });
+            halls.Add(new Hall { Name = "BBB", Location = "London" });
+
+
+        }
+
+        public List<Hall> GetHalls()
+        {
+            return halls;
+        }
+        public List<Hall> GetHalls(string location)
+        {
+            List<Hall> hallloc=new List<Hall>();
+            var hallsnew = from hall in halls where hall.Location.Equals(location) select hall;
+            foreach (var h in hallsnew)
+                hallloc.Add(h);
+            return hallloc;
+        }
+    }
+}
+
+
+
+
+Controllers->HallController.cs
+
+
+using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
+using WebApplication8.Models;
+
+namespace WebApplication8.Controllers
+{
+    public class HallController : Controller
+    {
+        public IActionResult Index()
+        {
+            HallBO halls= new HallBO();
+
+            return View(halls.GetHalls());
+        }
+        [HttpPost]
+        public IActionResult Index(string location)
+        {
+            HallBO halls = new HallBO();
+            List<Hall> hallsss = halls.GetHalls(location);
+
+            return View(hallsss);
+        }
+    }
+}
+
+
+
+
+Views->Hall->Index.cshtml
+
+
+@model IEnumerable<WebApplication8.Models.Hall>
+
+
+    <form method="post">
+        <input type="text" name="location" id="location">
+        <input type="submit" value="Search" id="Search">
+    </form>
+
+@foreach(var hall in Model)
+{
+    <li>@hall.Name  :  @hall.Location</li>
+
+}
+
+
