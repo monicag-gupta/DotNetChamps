@@ -1,0 +1,62 @@
+@model WebApplication9.Models.Registration
+
+@{
+    ViewBag.Title = "Registration Form";
+}
+
+<h2>Registration Form</h2>
+
+@using (Html.BeginForm())
+{
+    <div>
+        @Html.LabelFor(m => m.Name)
+        @Html.TextBoxFor(m => m.Name)
+        @Html.ValidationMessageFor(m => m.Name)
+    </div>
+
+    <br />
+
+    <div>
+        @Html.LabelFor(m => m.Age)
+        @Html.TextBoxFor(m => m.Age)
+        @Html.ValidationMessageFor(m => m.Age)
+    </div>
+
+    <br />
+
+    <div>
+        @Html.LabelFor(m => m.Address)
+        @Html.TextBoxFor(m => m.Address)
+        @Html.ValidationMessageFor(m => m.Address)
+    </div>
+
+    <br />
+
+    <div>
+        @Html.LabelFor(m => m.Email)
+        @Html.TextBoxFor(m => m.Email)
+        @Html.ValidationMessageFor(m => m.Email)
+    </div>
+
+    <br />
+
+    <div>
+        @Html.LabelFor(m => m.ConfirmEmail)
+        @Html.TextBoxFor(m => m.ConfirmEmail)
+        @Html.ValidationMessageFor(m => m.ConfirmEmail)
+    </div>
+
+    <br />
+
+    <div>
+        @Html.LabelFor(m => m.Phone)
+        @Html.TextBoxFor(m => m.Phone)
+        <small>Format: 91-1234-567-890</small>
+        @Html.ValidationMessageFor(m => m.Phone)
+    </div>
+
+    <br />
+
+    <input type="submit" value="Register" />
+}
+
