@@ -67,13 +67,24 @@ namespace YourProjectName.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit(Empl emp)
-        {
-            if (ModelState.IsValid)
             {
-                db.Entry(emp).State = System.Data.Entity.EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                if (ModelState.IsValid)
+                {
+                    // Assume 'emp' contains the ID of the employee to update and new values
+                    var existingEmp = db.Empls.Find(emp.ecode); // Retrieve the entity
+            
+                        if (existingEmp != null)
+                        {            
+                            // Modify properties - EF automatically tracks these changes
+                            existingEmp.ename = emp.ename;
+                            existingEmp.esal = emp.esal;
+                            db.SaveChanges(); // EF generates an UPDATE statement for only the changed fields
+                        }
+                    
+                    //db.Entry(emp).State = System.Data.Entity.EntityState.Modified;
+                    //db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
             return View(emp);
         }
 
