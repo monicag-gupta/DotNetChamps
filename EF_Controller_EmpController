@@ -1,0 +1,105 @@
+using System.Linq;
+using System.Net;
+using System.Web.Mvc;
+using YourProjectName.Models;
+
+namespace YourProjectName.Controllers
+{
+            public class EmpController : Controller
+    {
+        private EmpDBEntities db = new EmpDBEntities();
+
+        // READ ALL
+        public ActionResult Index()
+        {
+            return View(db.Empls.ToList());
+        }
+
+        // READ SINGLE
+        public ActionResult Details(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            Empl emp = db.Empls.Find(id);
+
+            if (emp == null)
+                return HttpNotFound();
+
+            return View(emp);
+        }
+
+        // CREATE GET
+        public ActionResult Create()
+        {
+            return View();
+        }
+
+        // CREATE POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(Empl emp)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Empls.Add(emp);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(emp);
+        }
+
+        // EDIT GET
+        public ActionResult Edit(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            Empl emp = db.Empls.Find(id);
+
+            if (emp == null)
+                return HttpNotFound();
+
+            return View(emp);
+        }
+
+        // EDIT POST
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit(Empl emp)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(emp).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            return View(emp);
+        }
+
+        // DELETE GET
+        public ActionResult Delete(int? id)
+        {
+            if (id == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            Empl emp = db.Empls.Find(id);
+
+            if (emp == null)
+                return HttpNotFound();
+
+            return View(emp);
+        }
+
+        // DELETE POST
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            Empl emp = db.Empls.Find(id);
+            db.Empls.Remove(emp);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+    }
+}
