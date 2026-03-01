@@ -1,0 +1,16 @@
+EF Explanation:
+
+1. EmpDBEntities is your Entity Framework DbContext class.
+It represents:
+•	Your Database
+•	All Tables inside the database as DbSet properties
+
+2. db.Empls
+Empls is a DbSet<Empl>
+It represents the Employee table in the database.
+So:
+•	db.Empls.ToList() → SELECT * FROM Empls
+•	db.Empls.Find(id) → SELECT * FROM Empls WHERE id = ?
+•	db.Empls.Add(emp) → INSERT
+•	db.Empls.Remove(emp) → DELETE
+•	db.SaveChanges() → Executes SQL in database
