@@ -1,0 +1,14 @@
+npm install -g typescript@4.9.5
+npm install -g @angular/cli@16
+ng version
+
+cd ..\Desktop\ngEgs
+
+ng new ng1app 
+
+cd ng1app
+
+ng serve
+
+Open browser :
+http://localhost:4200/
