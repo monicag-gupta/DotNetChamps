@@ -2,6 +2,8 @@ npm install -g typescript@4.9.5
 npm install -g @angular/cli@16
 ng version
 
+create the folder ngEgs in Desktop and change dir to it.
+
 cd ..\Desktop\ngEgs
 
 ng new ng1app 
