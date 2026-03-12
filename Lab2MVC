@@ -15,15 +15,17 @@ namespace Lab2.Controllers
             return View();
         }
         public ActionResult Calculate(string hallName, string ownerName,
-    int cost, DateTime from, DateTime to)
+    int cost, string from, string to)
 {
+    DateTime sd=DateTime.Parse(from);
+    DateTime ed=DateTime.Parse(to);
     ViewData["hallName"] = hallName;
     ViewData["ownerName"] = ownerName;
     ViewData["cost"] = cost;
-    ViewData["from"] = from.ToString("dd-MM-yyyy");
-    ViewData["to"] = to.ToString("dd-MM-yyyy");
+    ViewData["from"] = sd.ToString("dd-MM-yyyy");
+    ViewData["to"] = ed.ToString("dd-MM-yyyy");
 
-    TimeSpan diff = to - from;
+    TimeSpan diff = ed - st;
 
     int days = (int)diff.TotalDays;
     int total = days * cost;
@@ -52,7 +54,7 @@ namespace Lab2.Controllers
 
 
 Home-> Index.cshtml:
-<h1 style="text-align:center;">Rent Calculator</h1style="margin-left:></h1>
+<h1 style="text-align:center;">Rent Calculation</h1>
 
 <table style="margin-left: auto; margin-right: auto;">
     <form action="/Home/Calculate">
@@ -70,11 +72,11 @@ Home-> Index.cshtml:
     </tr>
     <tr>
         <th>From:</th>
-        <td><input type="date" name="from" id="from" /></td>
+        <td><input type="text" name="from" id="from" /></td>
     </tr>
     <tr>
         <th>Till:</th>
-        <td><input type="date" name="to" id="to" /></td>
+        <td><input type="text" name="to" id="to" /></td>
     </tr>
     <tr>
         <td colspan="2">
