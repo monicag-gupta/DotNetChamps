@@ -15,21 +15,22 @@ namespace Lab2.Controllers
             return View();
         }
         public ActionResult Calculate(string hallName, string ownerName,
-            int cost, DateTime from, DateTime to)
-        {
-            ViewData["hallName"] = hallName;
-            ViewData["ownerName"] = ownerName;
-            ViewData["cost"] = cost;
-            ViewData["from"] = from;
-            ViewData["to"] = to;
+    int cost, DateTime from, DateTime to)
+{
+    ViewData["hallName"] = hallName;
+    ViewData["ownerName"] = ownerName;
+    ViewData["cost"] = cost;
+    ViewData["from"] = from.ToString("dd-MM-yyyy");
+    ViewData["to"] = to.ToString("dd-MM-yyyy");
 
-            int days = to.Day - from.Day;
-            int total = days * cost;
-            ViewData["total"] = total;
+    TimeSpan diff = to - from;
 
-            return View();
-        }
+    int days = (int)diff.TotalDays;
+    int total = days * cost;
+    ViewData["total"] = total;
 
+    return View();
+}
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
