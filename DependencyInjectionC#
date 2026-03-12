@@ -1,0 +1,56 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp4
+{
+    interface IhotDrink
+    {
+        void prepare();
+    }
+    class Tea : IhotDrink
+    {
+        public void prepare()
+        {
+            Console.WriteLine("Tea");
+        }
+    }
+    class Coffee:IhotDrink
+    {
+        public void prepare()
+        {
+            Console.WriteLine("Coffee");
+        }
+    }
+    class Soup : IhotDrink
+    {
+        public void prepare()
+        {
+            Console.WriteLine("Soup");
+        }
+    }
+    class Restaurant
+    {
+        IhotDrink hotdrink;
+        public Restaurant(IhotDrink hotdrink)
+        {
+            this.hotdrink = hotdrink;
+        }
+        public void serve()
+        {
+            Console.WriteLine("Serving .. ");
+            hotdrink.prepare();
+        }
+    }
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Restaurant restaurant = new Restaurant(new Soup());
+            restaurant.serve();
+
+        }
+    }
+}
