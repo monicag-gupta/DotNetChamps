@@ -1,0 +1,102 @@
+HomeController.cs:
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace Lab2.Controllers
+{
+    public class HomeController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult Calculate(string hallName, string ownerName,
+            int cost, DateTime from, DateTime to)
+        {
+            ViewData["hallName"] = hallName;
+            ViewData["ownerName"] = ownerName;
+            ViewData["cost"] = cost;
+            ViewData["from"] = from;
+            ViewData["to"] = to;
+
+            int days = to.Day - from.Day;
+            int total = days * cost;
+            ViewData["total"] = total;
+
+            return View();
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+    }
+}
+
+
+
+
+
+Home-> Index.cshtml:
+<h1 style="text-align:center;">Rent Calculator</h1style="margin-left:></h1>
+
+<table style="margin-left: auto; margin-right: auto;">
+    <form action="/Home/Calculate">
+    <tr>
+        <th>Name: </th>
+        <td><input type="text" name="hallName" id="hallName" /></td>
+    </tr>
+    <tr>
+        <td>Owner: </td>
+        <td><input type="text" name="ownerName" id="ownerName" /></td>
+    </tr>
+    <tr>
+        <td>Cost: </td>
+        <td><input type="text" name="cost" id="cost" /></td>
+    </tr>
+    <tr>
+        <th>From:</th>
+        <td><input type="date" name="from" id="from" /></td>
+    </tr>
+    <tr>
+        <th>Till:</th>
+        <td><input type="date" name="to" id="to" /></td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <input type="submit" value="calculate" />
+        </td>
+    </tr>
+
+    </form>
+</table>
+
+
+
+Home->Calculate.cshtml:
+<h2>@ViewData["hallName"]</h2>
+<div id="owner">
+    Owner: @ViewData["ownerName"]
+</div>
+<div>
+    Cost Per day: @ViewData["cost"]
+</div>
+<div>
+    Booked from : @ViewData["from"] to @ViewData["to"]
+</div>
+<div>
+    Total Cost: @ViewData["total"]
+</div>
