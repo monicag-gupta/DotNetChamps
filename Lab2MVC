@@ -15,24 +15,25 @@ namespace Lab2.Controllers
             return View();
         }
         public ActionResult Calculate(string hallName, string ownerName,
-    int cost, string from, string to)
-{
-    DateTime sd=DateTime.Parse(from);
-    DateTime ed=DateTime.Parse(to);
-    ViewData["hallName"] = hallName;
-    ViewData["ownerName"] = ownerName;
-    ViewData["cost"] = cost;
-    ViewData["from"] = sd.ToString("dd-MM-yyyy");
-    ViewData["to"] = ed.ToString("dd-MM-yyyy");
+            int costPerDay, string startDate, string endDate)
+        {
+            DateTime sd = DateTime.ParseExact(startDate, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            DateTime ed = DateTime.ParseExact(endDate, "dd-MM-yyyy", System.Globalization.CultureInfo.InvariantCulture);
+            ViewData["hallName"] = hallName;
+            ViewData["ownerName"] = ownerName;
+            ViewData["cost"] = costPerDay;
+            ViewData["from"] = sd.ToString("dd-MM-yyyy");
+            ViewData["to"] = ed.ToString("dd-MM-yyyy");
 
-    TimeSpan diff = ed - st;
+            TimeSpan diff = ed - sd;
 
-    int days = (int)diff.TotalDays;
-    int total = days * cost;
-    ViewData["total"] = total;
+            int days = (int)diff.TotalDays;
+            int total = (days + 1) * costPerDay;
+            ViewData["total"] = total;
 
-    return View();
-}
+            return View();
+        }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -54,33 +55,34 @@ namespace Lab2.Controllers
 
 
 Home-> Index.cshtml:
-<h1 style="text-align:center;">Rent Calculation</h1>
+
+<h2 style="text-align:center;">Rent Calculation</h2>
 
 <table style="margin-left: auto; margin-right: auto;">
     <form action="/Home/Calculate">
     <tr>
-        <th>Name: </th>
+        <th>Name </th>
         <td><input type="text" name="hallName" id="hallName" /></td>
     </tr>
     <tr>
-        <td>Owner: </td>
+        <td>Hall owner </td>
         <td><input type="text" name="ownerName" id="ownerName" /></td>
     </tr>
     <tr>
-        <td>Cost: </td>
-        <td><input type="text" name="cost" id="cost" /></td>
+        <td>Cost per day </td>
+        <td><input type="text" name="costPerDay" id="costPerDay" /></td>
     </tr>
     <tr>
-        <th>From:</th>
-        <td><input type="text" name="from" id="from" /></td>
+        <th>Start date </th>
+        <td><input type="text" name="startDate" id="startDate" /></td>
     </tr>
     <tr>
-        <th>Till:</th>
-        <td><input type="text" name="to" id="to" /></td>
+        <th>End date </th>
+        <td><input type="text" name="endDate" id="endDate" /></td>
     </tr>
     <tr>
         <td colspan="2">
-            <input type="submit" value="calculate" />
+            <input type="submit" value="Calculate" id="calculate" />
         </td>
     </tr>
 
@@ -89,17 +91,19 @@ Home-> Index.cshtml:
 
 
 
+
 Home->Calculate.cshtml:
+
 <h2>@ViewData["hallName"]</h2>
 <div id="owner">
     Owner: @ViewData["ownerName"]
 </div>
-<div>
+<div id="cost">
     Cost Per day: @ViewData["cost"]
 </div>
-<div>
-    Booked from : @ViewData["from"] to @ViewData["to"]
+<div id="rentalDays">
+    Renting from @ViewData["from"] to @ViewData["to"]
 </div>
-<div>
+<div id="totalCost">
     Total Cost: @ViewData["total"]
 </div>
