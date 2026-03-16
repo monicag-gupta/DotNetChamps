@@ -41,4 +41,12 @@ app.component.html:
 </div> 
 
 
+
+custom.css
+
+.red {color:red;}  
+.blue {color:blue}  
+.cyan {color : cyan}  
+.brown {color : brown} 
+
   
