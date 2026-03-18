@@ -1,0 +1,58 @@
+ng generate component child
+
+child.component.ts:
+
+import { Component, Input } from '@angular/core';
+
+@Component({
+  selector: 'app-child',
+  templateUrl: './child.component.html',
+  styleUrls: ['./child.component.css']
+})
+export class ChildComponent {
+  name:string="Junior";
+  @Input() frmPa:string="";
+}
+
+
+
+
+child.component.html:
+
+<div>
+    <p>child works!</p>
+    <h1>This is the Child component</h1>
+    <h2>Name : {{name}}</h2>
+    <h1>Message from Parent: {{frmPa}}</h1>
+</div>
+
+
+
+
+
+app.component.ts:
+
+import { Component } from '@angular/core';
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+   styleUrls: ['./custom.css','./app.component.css']
+})
+export class AppComponent {
+  msgFrmPa:string="";
+ }
+
+
+
+
+app.component.html:
+
+<div>
+   Enter a message to the Child:<br/>
+   <input [(ngModel)]="msgFrmPa"/>
+   Passing Message to Child: {{msgFrmPa}}  
+    
+    <hr>
+    This area is reserved for Child Component:
+    <app-child [frmPa]="msgFrmPa"></app-child>
+</div>
