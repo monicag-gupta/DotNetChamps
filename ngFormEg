@@ -10,22 +10,22 @@ app.component.ts:
 
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
+
+
 @Component({
-selector: 'app-root',
-templateUrl: './app.component.html',
-styleUrls: ['./custom.css']
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-private formData: any = {};
-private showMessage: boolean = false;
-constructor() {
-}
-ngOnInit(): void {
-}
-registerUser(formdata: NgForm) {
-this.formData = formdata.value;
-this.showMessage = true;
-}
+  public formData: any = {};
+  public showMessage: boolean = false;
+  constructor() {}
+  ngOnInit(): void {}
+  registerUser(formdata: NgForm) {
+    this.formData = formdata.value;
+    this.showMessage = true;
+  }
 }
 
 
@@ -42,7 +42,7 @@ app.component.html
 <label for="username">User Name</label>
 </td>
 <td style="width:60%;">
-<input type="text" name="username" id="username" [(ngModel)]="username" required>
+<input type="text" name="username" id="username" ngModel required>
 </td>
 </tr>
 <tr>
@@ -50,7 +50,7 @@ app.component.html
 <label for="email">Email</label>
 </td>
 <td style="width:60%;">
-<input type="text" name="email" id="email" [(ngModel)]="email" required>
+<input type="text" name="email" id="email" ngModel required>
 </td>
 </tr>
 <tr>
@@ -58,7 +58,7 @@ app.component.html
 <label for="password">Password</label>
 </td>
 <td style="width:60%;">
-<input type="password" name="password" id="password" [(ngModel)]="password" required>
+<input type="password" name="password" id="password" ngModel required>
 </td>
 </tr>
 <tr>
@@ -73,7 +73,6 @@ app.component.html
 <h3>Thanks You {{formData.username}} for registration</h3>
 </div>
 </div>
-
 
 
 
