@@ -1,0 +1,81 @@
+Forms:
+Template-Driven Forms (Simple Approach)
+Uses HTML + directives
+Good for small forms
+
+
+
+
+app.component.ts:
+
+import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
+@Component({
+selector: 'app-root',
+templateUrl: './app.component.html',
+styleUrls: ['./custom.css']
+})
+export class AppComponent implements OnInit {
+private formData: any = {};
+private showMessage: boolean = false;
+constructor() {
+}
+ngOnInit(): void {
+}
+registerUser(formdata: NgForm) {
+this.formData = formdata.value;
+this.showMessage = true;
+}
+}
+
+
+
+
+app.component.html
+
+<h2>Template Driven Form</h2>
+<div>
+<form #signupForm="ngForm" (ngSubmit)="registerUser(signupForm)">
+<table style="width:60%;" cellpadding="5" cellspacing="5">
+<tr>
+<td style="width:40%;">
+<label for="username">User Name</label>
+</td>
+<td style="width:60%;">
+<input type="text" name="username" id="username" [(ngModel)]="username" required>
+</td>
+</tr>
+<tr>
+<td style="width:40%;">
+<label for="email">Email</label>
+</td>
+<td style="width:60%;">
+<input type="text" name="email" id="email" [(ngModel)]="email" required>
+</td>
+</tr>
+<tr>
+<td style="width:40%;">
+<label for="password">Password</label>
+</td>
+<td style="width:60%;">
+<input type="password" name="password" id="password" [(ngModel)]="password" required>
+</td>
+</tr>
+<tr>
+<td style="width:40%;"></td>
+<td style="width:60%;">
+<button type="submit">Sign Up</button>
+</td>
+</tr>
+</table>
+</form>
+<div *ngIf="showMessage">
+<h3>Thanks You {{formData.username}} for registration</h3>
+</div>
+</div>
+
+
+
+
+
+
