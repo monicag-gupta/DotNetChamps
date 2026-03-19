@@ -1,0 +1,128 @@
+Models-> CalculateDiscount.cs
+
+
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace MVCLab1.Models
+{
+    public class CalculateDiscount
+    {
+        [Display(Name = "Enter Item Price")]
+        [Required(ErrorMessage = "Please Enter a valid Number")]
+        [Range(0, Int32.MaxValue, ErrorMessage = "The Field Enter Item Price must be a number.")]
+        public int Price {  get; set; }
+
+        [Display(Name = "Discount Percentage")]
+        [Required(ErrorMessage = "Please Enter a value between 0 and 100")]
+        [Range(0, 100, ErrorMessage = "The Field Discount Percentage must be a number.")]
+
+        public double DiscountPercentage {  get; set; }
+
+        [Display(Name = "Discount Amount")]
+        public double DiscountAmount {  get; set; }
+
+        [Display(Name = "Amount to be paid")]
+        public double Total {  get; set; }
+
+    }
+}
+
+
+
+
+
+Controllers->HomeController.cs:
+
+using MVCLab1.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Mvc;
+
+namespace MVCLab1.Controllers
+{
+    public class HomeController : Controller
+    {
+        public ActionResult Index()
+        {
+            return View(new CalculateDiscount());
+        }
+        public ActionResult Calculate(CalculateDiscount calc)
+        {
+            if (ModelState.IsValid)
+            { 
+                calc.DiscountAmount = (calc.DiscountPercentage * calc.Price) / 100;
+                calc.Total = calc.Price - calc.DiscountAmount;
+                return View(calc);
+            }
+            return View("Index");
+        }
+
+        public ActionResult About()
+        {
+            ViewBag.Message = "Your application description page.";
+
+            return View();
+        }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+Views->Home-> Index.cshtml:
+
+@model MVCLab1.Models.CalculateDiscount
+
+<h2>Discount Calculation System</h2>
+
+@using (Html.BeginForm("Calculate", "Home"))
+{
+    <div>
+        @Html.LabelFor(m => m.Price)
+        @Html.TextBoxFor(m => m.Price, new { @id = "price" })
+        @Html.ValidationMessageFor(m => m.Price, "", new { id = "PriceError", style = "color:red" })
+    </div>
+    <div>
+        @Html.LabelFor(m => m.DiscountPercentage)
+        @Html.TextBoxFor(m => m.DiscountPercentage, new { @id = "disc" })
+        @Html.ValidationMessageFor(m => m.DiscountPercentage, "", new { id = "DiscError", style = "color:red" })
+    </div>
+    <input type="submit" value="Calculate" id="calculate"/>
+}
+
+
+
+
+
+
+Views->Home->Calculate.cshtml:
+
+@model MVCLab1.Models.CalculateDiscount
+
+<h1>Discount Details !!!</h1>
+<table border="1">
+    <tr><td>Item Price</td><td>@Model.Price</td></tr>
+    <tr><td>Discount Percentage</td><td>@Model.DiscountPercentage</td></tr>
+    <tr><td>Discount Amount</td><td>@Model.DiscountAmount</td></tr>
+    <tr><td>Amount to be paid</td><td>@Model.Total</td></tr>
+</table>
+
+
