@@ -139,11 +139,11 @@ app.component.html:
       <table>
         <tr>
           <td>User Name:</td>
-          <td><input type="text" [(ngModel)]="username" required></td>
+          <td><input type="text" name="username" required></td>
         </tr>
         <tr>
           <td>Password:</td>
-          <td><input type="password" [(ngModel)]="password" required></td>
+          <td><input type="password" name="password" ngModel required></td>
       </tr>
       <tr>
         <td></td>
