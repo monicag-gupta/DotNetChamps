@@ -1,0 +1,32 @@
+Use PowerShell Command Properly:
+
+GET
+Invoke-WebRequest http://localhost:52956/api/ProductApi -UseBasicParsing
+OR shorter:
+iwr http://localhost:52956/api/ProductApi -UseBasicParsing
+
+GET 1 Data
+Invoke-WebRequest http://localhost:52956/api/ProductApi/1 -UseBasicParsing
+OR shorter:
+iwr http://localhost:52956/api/ProductApi -UseBasicParsing
+
+
+POST
+Invoke-WebRequest `
+  -Uri http://localhost:52956/api/ProductApi `
+  -Method POST `
+  -Body '{"Name":"Pen","Price":10}' `
+  -ContentType "application/json" -UseBasicParsing
+
+PUT
+Invoke-WebRequest `
+  -Uri http://localhost:52956/api/ProductApi/1 `
+  -Method PUT `
+  -Body '{"Id":1,"Name":"Pen Updated","Price":15}' `
+  -ContentType "application/json"  -UseBasicParsing
+
+
+DELETE
+Invoke-WebRequest `
+  -Uri http://localhost:52956/api/ProductApi/1 `
+  -Method DELETE -UseBasicParsing
